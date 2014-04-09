@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/Template/template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Softness - Cadastro Cliente</ui:define>
+
+	<ui:define name="centro">
+
+		<h3>Cadastro de Clientes</h3>
+		<p:tabView id="tabVCliente">
+		<p:tab title="Cadastro">
+		
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Id:" for="id" />
+				<h:panelGrid columns="10">
+					<h:inputText value="" size="4" maxlength="4" disabled="true"
+						id="id" />
+					<h:outputLabel value="Nome:" for="nome" />
+					<h:inputText id="nome" size="60" maxlength="45" />
+					<h:outputLabel for="cpf" value="CPF:" />
+					<h:inputText id="cpf" size="14" maxlength="14" />
+					<h:outputLabel for="rg" value="RG:" />
+					<h:inputText id="rg" value="" size="8" maxlength="8" />
+					<h:outputLabel for="orgaoEmissor" value="Orgão Emissor:" />
+					<h:inputText id="orgaoEmissor" value="" size="5" maxlength="5" />
+
+				</h:panelGrid>
+				<h:outputLabel value="Sexo:" for="sexo" />
+				<h:panelGrid columns="9">
+					<h:selectOneMenu id="sexo">
+						<f:selectItem itemLabel="Escolha" itemValue="" />
+						<f:selectItem itemLabel="Masculino" itemValue="M" />
+						<f:selectItem itemLabel="Feminino" itemValue="F" />
+					</h:selectOneMenu>
+
+					<h:outputLabel value="Estado Civil:" for="estadoCivil" />
+					<h:selectOneMenu id="estadoCivil">
+						<f:selectItem itemLabel="Estado Civil" itemValue="" />
+						<f:selectItem itemLabel="Solteiro(a)" itemValue="solteiro" />
+						<f:selectItem itemLabel="Casado(a)" itemValue="casado" />
+						<f:selectItem itemLabel="Viuvo(a)" itemValue="viuvo" />
+					</h:selectOneMenu>
+					<h:outputLabel for="dataNascimento" value="Data Nascimento:" />
+					<h:inputText id="dataNacismento" value="" size="10" maxlength="10" />
+					<h:outputLabel for="residenlcial" value="NºResidencial:" />
+					<h:inputText id="residencial" value="" size="8" maxlength="8" />
+					<h:outputLabel for="celular1" value="NºCelular:" />
+					<h:inputText id="celular1" value="" size="7" maxlength="8" />
+
+
+				</h:panelGrid>
+				<h:outputLabel for="celular2" value="NºCelular 2:" />
+				<h:panelGrid columns="4">
+
+
+					<h:inputText id="celular2" value="" size="7" maxlength="8" />
+					<h:outputLabel for="email" value="Email:" />
+					<h:inputText id="email" value=""
+						validatorMessage="E-mail invalido!" size="90" maxlength="50">
+						<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+					</h:inputText>
+				</h:panelGrid>
+
+			</h:panelGrid>
+					
+					<p:panel header="Endereço">
+					<h:panelGrid columns="2">
+						<h:outputLabel for="cep" value="CEP:" />
+						<h:panelGrid columns="10">
+							<h:inputText id="cep" value="" size="9" maxlength="9" />
+							<p:commandLink>
+								<p:graphicImage value="/resources/img/search24x24.png" />
+							</p:commandLink>
+							<h:outputLabel for="estado" value="Estado:" />
+							<h:inputText id="estado" value="" size="10" maxlength="10" />
+							<h:outputLabel for="cidade" value="Cidade:" />
+							<h:inputText id="cidade" value="" size="20" maxlength="20" />
+							<h:outputLabel for="bairro" value="Bairro:" />
+							<h:inputText id="bairro" value="" />
+
+
+
+						</h:panelGrid>
+						<h:outputLabel for="tipoLogradouro" value="Tipo Logradouro:" />
+						<h:panelGrid columns="5">
+							<h:selectOneMenu id="tipoLogradouro">
+								<f:selectItem itemLabel="Aeroporto" itemValue="aeroporto" />
+								<f:selectItem itemLabel="Alameda" itemValue="alameda" />
+								<f:selectItem itemLabel="Area" itemValue="area" />
+								<f:selectItem itemLabel="Avenida" itemValue="avenida" />
+								<f:selectItem itemLabel="Beco" itemValue="beco" />
+								<f:selectItem itemLabel="Campo" itemValue="campo" />
+								<f:selectItem itemLabel="Chácara" itemValue="chacara" />
+								<f:selectItem itemLabel="Colônia" itemValue="colonia" />
+								<f:selectItem itemLabel="Condominio" itemValue="condominio" />
+								<f:selectItem itemLabel="Conjunto" itemValue="conjunto" />
+								<f:selectItem itemLabel="Distrito" itemValue="distrito" />
+								<f:selectItem itemLabel="Esplanada" itemValue="esplanada" />
+								<f:selectItem itemLabel="Estação" itemValue="estacao" />
+								<f:selectItem itemLabel="Estrada" itemValue="estrada" />
+								<f:selectItem itemLabel="Favela" itemValue="favela" />
+								<f:selectItem itemLabel="Fazenda" itemValue="fazenda" />
+								<f:selectItem itemLabel="Feira" itemValue="feira" />
+								<f:selectItem itemLabel="Granja" itemValue="granja" />
+								<f:selectItem itemLabel="Jardim" itemValue="jardim" />
+								<f:selectItem itemLabel="Ladeira" itemValue="ladeira" />
+								<f:selectItem itemLabel="Lago" itemValue="lago" />
+								<f:selectItem itemLabel="Lagoa" itemValue="lagoa" />
+								<f:selectItem itemLabel="Largo" itemValue="largo" />
+								<f:selectItem itemLabel="Loteamento" itemValue="loteamento" />
+								<f:selectItem itemLabel="Morro" itemValue="morro" />
+								<f:selectItem itemLabel="Núcleo" itemValue="nucleo" />
+								<f:selectItem itemLabel="Outros" itemValue="outros" />
+								<f:selectItem itemLabel="Parque" itemValue="parque" />
+								<f:selectItem itemLabel="Passarela" itemValue="passarela" />
+								<f:selectItem itemLabel="Pátio" itemValue="patio" />
+								<f:selectItem itemLabel="Praça" itemValue="praca" />
+								<f:selectItem itemLabel="Quadra" itemValue="quadra" />
+								<f:selectItem itemLabel="Recanto" itemValue="recanto" />
+								<f:selectItem itemLabel="Residencial" itemValue="residencial" />
+								<f:selectItem itemLabel="Rodovia" itemValue="rodovia" />
+								<f:selectItem itemLabel="Rua" itemValue="rua" />
+								<f:selectItem itemLabel="Setor" itemValue="setor" />
+								<f:selectItem itemLabel="Sítio" itemValue="sitio" />
+								<f:selectItem itemLabel="Travessa" itemValue="travessa" />
+								<f:selectItem itemLabel="Trecho" itemValue="trecho" />
+								<f:selectItem itemLabel="Trevo" itemValue="trevo" />
+								<f:selectItem itemLabel="Vale" itemValue="vale" />
+								<f:selectItem itemLabel="Vereda" itemValue="vereda" />
+								<f:selectItem itemLabel="Via" itemValue="via" />
+								<f:selectItem itemLabel="Viaduto" itemValue="viaduto" />
+								<f:selectItem itemLabel="Viela" itemValue="viela" />
+								<f:selectItem itemLabel="Vila" itemValue="vila" />
+
+							</h:selectOneMenu>
+							<h:outputLabel for="logradouro" value="Logradouro:" />
+							<h:inputText id="logradouro" value="" size="50" maxlength="50" />
+							<h:outputText for="numero" value="Numero:" />
+							<h:inputText id="numero" value="" size="10" maxlength="10" />
+
+
+						</h:panelGrid>
+
+					</h:panelGrid>
+					</p:panel>
+				
+			<p:panel>
+				<p:commandButton value="Novo" action="#" />
+				<p:commandButton value="Editar" action="#" />
+				<p:commandButton value="Excluir" action="#" />
+				<p:commandButton value="Salvar" action="#" />
+				<p:commandButton value="Cancelar" action="#" />
+				<p:commandButton value="Fechar" global="false" process="@this"
+					readonly="true" transient="true" immediate="true"
+					style="margin-top: 5px;" onclick="" />
+			</p:panel>
+
+
+
+		
+
+</p:tab>
+
+<p:tab >
+<f:facet name="title">
+				<p:graphicImage value="/resources/img/search24x24.png" />
+			</f:facet>
+			Consulta em tabela
+
+</p:tab>
+</p:tabView>
+
+	</ui:define>
+
+</ui:composition>
