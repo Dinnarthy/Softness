@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="/Template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -11,8 +12,13 @@
 	<ui:define name="centro">
 
 		<h3>Cadastro de Clientes</h3>
-		<p:tabView id="tabVCliente">
+		
+		<p:tabView id="tabVCliente" style="width:1024px">
+		
+		<p:growl id="growl" showDetail="true" sticky="true" /> 
 		<p:tab title="Cadastro">
+		
+		<p:panel id="pCadastro">
 		
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Id:" for="id" />
@@ -45,8 +51,8 @@
 						<f:selectItem itemLabel="Viuvo(a)" itemValue="viuvo" />
 					</h:selectOneMenu>
 					<h:outputLabel for="dataNascimento" value="Data Nascimento:" />
-					<h:inputText id="dataNacismento" value="" size="10" maxlength="10" />
-					<h:outputLabel for="residenlcial" value="NºResidencial:" />
+					<h:inputText id="dataNascimento" value="" size="10" maxlength="10" />
+					<h:outputLabel for="residencial" value="NºResidencial:" />
 					<h:inputText id="residencial" value="" size="8" maxlength="8" />
 					<h:outputLabel for="celular1" value="NºCelular:" />
 					<h:inputText id="celular1" value="" size="7" maxlength="8" />
@@ -149,10 +155,11 @@
 					</p:panel>
 				
 			<p:panel>
+			
 				<p:commandButton value="Novo" action="#" />
 				<p:commandButton value="Editar" action="#" />
 				<p:commandButton value="Excluir" action="#" />
-				<p:commandButton value="Salvar" action="#" />
+				<p:commandButton value="Salvar" action="#" update="growl,tabVCliente"  actionListener="#{clienteBean.salvar}" />
 				<p:commandButton value="Cancelar" action="#" />
 				<p:commandButton value="Fechar" global="false" process="@this"
 					readonly="true" transient="true" immediate="true"
@@ -161,17 +168,24 @@
 
 
 
-		
+	</p:panel>
+				<!-- Growl fora do h:panelGrid para renderizar via ajax -->
+				<h:form>
 
-</p:tab>
+					<p:growl id="growl" showDetail="true"  />
+
+				</h:form>
+				
+			</p:tab>
 
 <p:tab >
 <f:facet name="title">
 				<p:graphicImage value="/resources/img/search24x24.png" />
 			</f:facet>
-			Consulta em tabela
+				
 
-</p:tab>
+			</p:tab>
+
 </p:tabView>
 
 	</ui:define>

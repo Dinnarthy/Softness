@@ -1,0 +1,39 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+    
+    
+    	<!-- Drive do Mysql -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/softness</property>
+		<property name="hibernate.connection.username">root</property>
+		<!--  <property name="hibernate.connection.password"></property> -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+
+		<!-- Debug -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="generate_statistics">true</property>
+		<property name="use_sql_comments">true</property>
+
+		<!-- CONFIGURAÇÕES DO POOL DE CONEXÕES -->
+		<property name="c3p0.min_size">1</property>
+		<!-- NUMERO MINIMO DE CONEXOES -->
+		<property name="c3p0.max_size">20</property>
+		<!-- NUMERO MAXIMO DE CONEXOES -->
+		<property name="c3p0.timeout">300</property>
+		<!-- DE 5 EM 5 MINUTOS ELE FECHA A SESSAO -->
+		<property name="c3p0.max_statements">80</property>
+		<!-- NO MAXIMO 80 STATEMENTS POR CONEXAO -->
+		<property name="c3p0.idle_test_period">300</property>
+		<!-- CONFIGURAÇÕES DO POOL DE CONEXÕES -->
+
+		<!-- Mapeamentos -->
+		<mapping class="br.com.softness.cliente.Cliente" />
+		<mapping class="br.com.softness.endereco.Endereco" />
+		
+	</session-factory>
+</hibernate-configuration>

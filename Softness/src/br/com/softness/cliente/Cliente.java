@@ -45,7 +45,7 @@ public class Cliente {
 	private Date dataNacimento;
 
 	@Column(name = "numero_residencial")
-	private String numeroResidencialString;
+	private String numeroResidencial;
 
 	@Column(name = "numero_celular1")
 	private String numeroCelular1;
@@ -125,11 +125,11 @@ public class Cliente {
 	}
 
 	public String getNumeroResidencialString() {
-		return numeroResidencialString;
+		return numeroResidencial;
 	}
 
 	public void setNumeroResidencialString(String numeroResidencialString) {
-		this.numeroResidencialString = numeroResidencialString;
+		this.numeroResidencial = numeroResidencialString;
 	}
 
 	public String getNumeroCelular1() {
@@ -163,6 +163,34 @@ public class Cliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 
