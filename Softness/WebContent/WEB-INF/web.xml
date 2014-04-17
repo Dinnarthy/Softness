@@ -5,8 +5,17 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>Softness</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsf</welcome-file>
+		<welcome-file>cliente.jsf</welcome-file>
 	</welcome-file-list>
+	<filter>
+    <display-name>HibernateSessionRequestFilter</display-name>
+    <filter-name>HibernateSessionRequestFilter</filter-name>
+    <filter-class>br.com.softness.web.filter.HibernateSessionRequestFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HibernateSessionRequestFilter</filter-name>
+    <url-pattern>*.jsf</url-pattern>
+  </filter-mapping>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

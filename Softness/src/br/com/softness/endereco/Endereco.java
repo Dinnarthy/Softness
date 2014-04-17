@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.softness.cliente.Cliente;
 
 @Entity
 @Table(name = "endereco")
@@ -34,6 +37,9 @@ public class Endereco {
 
 	@Column(name = "numero")
 	private String numero;
+	
+	@OneToOne(mappedBy="endereco")
+	private Cliente cliente;
 
 	public Integer getIdEndereco() {
 		return idEndereco;
@@ -41,6 +47,15 @@ public class Endereco {
 
 	public void setIdEndereco(Integer idEndereco) {
 		this.idEndereco = idEndereco;
+	}
+
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Integer getCep() {

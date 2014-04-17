@@ -5,15 +5,15 @@ import java.util.List;
 
 public interface ClienteDAO {
 	
-	public void salvar(Cliente user);
+	public void salvar(Cliente cliente);
 	
-	public void delete(Cliente user);
+	public void delete(Cliente cliente);
 	
-	public void alter(Cliente user);
+	public void alter(Cliente cliente);
 	
 	public Cliente getById(Integer idCliente);
 	
-	public Cliente getByEmail(String email);
+	public Cliente getByCpf(String email);
 	
 	public Cliente getByNome(String nome);
 	

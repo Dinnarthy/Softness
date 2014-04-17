@@ -2,6 +2,7 @@ package br.com.softness.cliente;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Cliente {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
-	private Date dataNacimento;
+	private Date dataNascimento;
 
 	@Column(name = "numero_residencial")
 	private String numeroResidencial;
@@ -56,7 +57,7 @@ public class Cliente {
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id")
 	Endereco endereco;
 
@@ -116,20 +117,20 @@ public class Cliente {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public Date getDataNacimento() {
-		return dataNacimento;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
 	public void setDataNacimento(Date dataNacimento) {
-		this.dataNacimento = dataNacimento;
+		this.dataNascimento = dataNacimento;
 	}
 
-	public String getNumeroResidencialString() {
+	public String getNumeroResidencial() {
 		return numeroResidencial;
 	}
 
-	public void setNumeroResidencialString(String numeroResidencialString) {
-		this.numeroResidencial = numeroResidencialString;
+	public void setNumeroResidencial(String numeroResidencial) {
+		this.numeroResidencial = numeroResidencial;
 	}
 
 	public String getNumeroCelular1() {
