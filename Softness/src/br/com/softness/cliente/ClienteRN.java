@@ -37,6 +37,9 @@ public class ClienteRN {
 		//}
 		
 	}
+	public List consultaTodosCliente(){
+		return clienteDAO.consultaTodosClientes();
+	}
 	
 	public void exluir(Cliente cliente){
 		clienteDAO.delete(cliente);

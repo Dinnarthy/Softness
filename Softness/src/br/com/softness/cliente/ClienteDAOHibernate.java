@@ -2,6 +2,7 @@ package br.com.softness.cliente;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 public class ClienteDAOHibernate implements ClienteDAO {
@@ -46,6 +47,12 @@ public class ClienteDAOHibernate implements ClienteDAO {
 	public List<Cliente> listar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List consultaTodosClientes() {
+		Criteria crit = session.createCriteria(Cliente.class);
+		
+		return crit.list();
 	}
 	
 	

@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface ClienteDAO {
 	
+	public List consultaTodosClientes();
+	
 	public void salvar(Cliente cliente);
 	
 	public void delete(Cliente cliente);

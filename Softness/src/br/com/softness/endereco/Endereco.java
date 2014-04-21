@@ -18,7 +18,7 @@ public class Endereco {
 	private Integer idEndereco;
 
 	@Column(name = "cep")
-	private Integer cep;
+	private String cep;
 
 	@Column(name = "estado")
 	private String estado;
@@ -58,11 +58,11 @@ public class Endereco {
 		this.cliente = cliente;
 	}
 
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 

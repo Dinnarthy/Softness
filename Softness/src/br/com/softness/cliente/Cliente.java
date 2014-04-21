@@ -1,5 +1,6 @@
 package br.com.softness.cliente;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -43,7 +44,7 @@ public class Cliente {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
-	private Date dataNascimento;
+	private Date dataNascimento ;
 
 	@Column(name = "numero_residencial")
 	private String numeroResidencial;
@@ -117,12 +118,13 @@ public class Cliente {
 		this.estadoCivil = estadoCivil;
 	}
 
+	
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNacimento(Date dataNacimento) {
-		this.dataNascimento = dataNacimento;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getNumeroResidencial() {
