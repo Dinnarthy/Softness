@@ -20,12 +20,11 @@ public class ClienteDAOHibernate implements ClienteDAO {
 	}
 
 	public void delete(Cliente user) {
-		// TODO Auto-generated method stub
-		
+		session.delete(user);
 	}
 
 	public void alter(Cliente user) {
-		// TODO Auto-generated method stub
+		session.update(user);
 		
 	}
 
@@ -51,7 +50,7 @@ public class ClienteDAOHibernate implements ClienteDAO {
 
 	public List consultaTodosClientes() {
 		Criteria crit = session.createCriteria(Cliente.class);
-		
+		crit.setMaxResults(15);
 		return crit.list();
 	}
 	

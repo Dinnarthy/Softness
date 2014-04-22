@@ -30,9 +30,8 @@ public class ClienteBean  {
 	private List<Cliente> clientes;
 	private Cliente cliente;  
 	private Endereco endereco; 
-	private Cliente selectCliente;
-	private String x="Testando";
-	
+	//private Cliente selectCliente;
+	private boolean campos ;
 	
 	
 	public ClienteBean() {
@@ -42,13 +41,8 @@ public class ClienteBean  {
 	public void init(){
 		ClienteRN clienteRN = new ClienteRN();
 		clientes = clienteRN.consultaTodosCliente();
-		if(clientes==null){
-			System.out.print("cliente está null");
-
-		}else{
-			System.out.print("Clientes nao está null");
-
-		}
+		desabilitarCampos();
+		
 	}
 
 	public void salvar(ActionEvent event){
@@ -61,8 +55,7 @@ public class ClienteBean  {
 				clienteRN.salvar(cliente);
 				FacesContext context = FacesContext.getCurrentInstance();
 		        context.addMessage(null, new FacesMessage( "Cliente cadastrado com sucesso. "));
-		        cliente=null;
-		        endereco=null;
+		        desabilitarCampos();
 			
 			
 			
@@ -83,6 +76,25 @@ public class ClienteBean  {
 		
 		cliente = new Cliente();
 		endereco = new Endereco();
+		habilitarCampos();
+	}
+	
+	public void cancelar(ActionEvent event){
+		habilitarCampos();
+	}
+	
+	public void excluir(ActionEvent event){
+		ClienteRN clienteRN = new ClienteRN();
+
+		System.out.print("CLIENTE : "+ cliente.getNome());
+		clienteRN.exluir(cliente);
+		System.out.print("CLIENTE : "+ cliente.getNome());
+
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage( "Cliente excluido com sucesso "));
+        cliente=null;
+        desabilitarCampos();
+		
 	}
 	
 	public String cancelar(){
@@ -91,8 +103,22 @@ public class ClienteBean  {
 		
 		
 	}
-	public void onRowSelect(SelectEvent event) {  
+	
+	public void habilitarCampos(){
+		campos = false ;
+		
+	}
+	
+	public void desabilitarCampos(){
+		campos = true ;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+		
         this.cliente = (Cliente) event.getObject();  
+       this.endereco  = cliente.getEndereco();
+       System.out.print("ID"+ cliente.getIdCliente());
+       
     }
 	 
       
@@ -113,22 +139,22 @@ public class ClienteBean  {
 		this.endereco = endereco;
 	}
 
-	public String getX() {
-		return x;
-	}
-
-	public void setX(String x) {
-		this.x = x;
-	}
+	
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
-	public Cliente getSelectCliente() {
-		return selectCliente;
+	public boolean isCampos() {
+		return campos;
 	}
+	public void setCampos(boolean campos) {
+		this.campos = campos;
+	}
+	
+	
+	
 	
 	}
 	

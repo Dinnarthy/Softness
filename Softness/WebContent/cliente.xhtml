@@ -10,7 +10,7 @@
 	<ui:define name="title">Softness - Cadastro Cliente</ui:define>
 
 	<ui:define name="centro">
-	
+
 		<h:form id="edicao">
 
 			<p:tabView id="tabVCliente" style="width:1024px">
@@ -24,31 +24,31 @@
 						<h:panelGrid columns="2" id="pG1">
 							<h:outputLabel value="Id:" for="id" />
 							<h:panelGrid columns="10" id="pG2">
-								<h:inputText size="4" maxlength="4" disabled="true" id="id" />
+								<h:inputText size="4" value="#{clienteBean.cliente.idCliente}"
+									maxlength="4" disabled="true" id="id" />
 								<h:outputLabel value="Nome:" for="nome" />
 								<h:inputText id="nome" size="60" maxlength="45" required="true"
 									requiredMessage="Nome Obrigatório"
-									disabled="#{clienteBean.cliente == null}"
+									disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.nome}" />
 								<h:outputLabel for="cpf" value="CPF:" />
 								<h:inputText id="cpf" size="14" maxlength="14"
-									disabled="#{clienteBean.cliente == null}"
+									disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.cpf}" />
 								<h:outputLabel for="rg" value="RG:" />
 								<h:inputText id="rg" size="8" maxlength="8"
 									value="#{clienteBean.cliente.rg}"
-									disabled="#{clienteBean.cliente == null}" />
+									disabled="#{clienteBean.campos}" />
 								<h:outputLabel for="orgaoEmissor" value="Orgão Emissor:" />
 								<h:inputText id="orgaoEmissor"
 									value="#{clienteBean.cliente.orgaoEmissor}"
-									disabled="#{clienteBean.cliente == null}" size="5"
-									maxlength="5" />
+									disabled="#{clienteBean.campos}" size="5" maxlength="5" />
 
 							</h:panelGrid>
 							<h:outputLabel value="Sexo:" for="sexo" />
 							<h:panelGrid columns="9" id="pG3">
-								<h:selectOneMenu disabled="#{clienteBean.cliente == null}"
-									id="sexo" value="#{clienteBean.cliente.sexo}">
+								<h:selectOneMenu disabled="#{clienteBean.campos}" id="sexo"
+									value="#{clienteBean.cliente.sexo}">
 									<f:selectItem itemLabel="Escolha" itemValue="" />
 									<f:selectItem itemLabel="Masculino" itemValue="M" />
 									<f:selectItem itemLabel="Feminino" itemValue="F" />
@@ -57,7 +57,7 @@
 								<h:outputLabel value="Estado Civil:" for="estadoCivil" />
 								<h:selectOneMenu id="estadoCivil"
 									value="#{clienteBean.cliente.estadoCivil}"
-									disabled="#{clienteBean.cliente == null}">
+									disabled="#{clienteBean.campos}">
 									<f:selectItem itemLabel="Estado Civil" itemValue="" />
 									<f:selectItem itemLabel="Solteiro(a)" itemValue="SOLTEIRO" />
 									<f:selectItem itemLabel="Casado(a)" itemValue="CASADO" />
@@ -65,20 +65,18 @@
 								</h:selectOneMenu>
 								<h:outputLabel for="dataNascimento" value="Data Nascimento:" />
 								<h:inputText id="dataNascimento"
-									disabled="#{clienteBean.cliente == null}"
+									disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.dataNascimento}" size="10"
 									maxlength="10">
 									<f:convertDateTime pattern="dd/MM/yyyy" type="date"
 										timeZone="GMT-3" />
 								</h:inputText>
 								<h:outputLabel for="residencial" value="NºResidencial:" />
-								<h:inputText id="residencial"
-									disabled="#{clienteBean.cliente == null}"
+								<h:inputText id="residencial" disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.numeroResidencial}" size="8"
 									maxlength="8" />
 								<h:outputLabel for="celular1" value="NºCelular:" />
-								<h:inputText id="celular1"
-									disabled="#{clienteBean.cliente == null}"
+								<h:inputText id="celular1" disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.numeroCelular1}" size="7"
 									maxlength="8" />
 
@@ -88,13 +86,11 @@
 							<h:panelGrid columns="4" id="pG4">
 
 
-								<h:inputText id="celular2"
-									disabled="#{clienteBean.cliente == null}"
+								<h:inputText id="celular2" disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.numeroCelular2}" size="7"
 									maxlength="8" />
 								<h:outputLabel for="email" value="Email:" />
-								<h:inputText id="email"
-									disabled="#{clienteBean.cliente == null}"
+								<h:inputText id="email" disabled="#{clienteBean.campos}"
 									value="#{clienteBean.cliente.email}"
 									validatorMessage="E-mail invalido!" size="90" maxlength="50">
 									<f:validateRegex
@@ -108,24 +104,21 @@
 							<h:panelGrid columns="2" id="pG5">
 								<h:outputLabel for="cep" value="CEP:" />
 								<h:panelGrid columns="10" id="pG6">
-									<h:inputText id="cep" disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="cep" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.cep}" size="9" maxlength="9" />
 									<p:commandLink>
 										<p:graphicImage value="/resources/img/search24x24.png" />
 									</p:commandLink>
 									<h:outputLabel for="estado" value="Estado:" />
-									<h:inputText id="estado"
-										disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="estado" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.estado}" size="10"
 										maxlength="10" />
 									<h:outputLabel for="cidade" value="Cidade:" />
-									<h:inputText id="cidade"
-										disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="cidade" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.cidade}" size="20"
 										maxlength="20" />
 									<h:outputLabel for="bairro" value="Bairro:" />
-									<h:inputText id="bairro"
-										disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="bairro" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.bairro}" />
 
 
@@ -133,7 +126,7 @@
 								</h:panelGrid>
 								<h:outputLabel for="tipoLogradouro" value="Tipo Logradouro:" />
 								<h:panelGrid columns="5" id="pG7">
-									<h:selectOneMenu disabled="#{clienteBean.cliente == null}"
+									<h:selectOneMenu disabled="#{clienteBean.campos}"
 										id="tipoLogradouro"
 										value="clienteBean.endereco.tipoLogradouro">
 										<f:selectItem itemLabel="Aeroporto" itemValue="aeroporto" />
@@ -186,13 +179,11 @@
 
 									</h:selectOneMenu>
 									<h:outputLabel for="logradouro" value="Logradouro:" />
-									<h:inputText id="logradouro"
-										disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="logradouro" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.logradouro}" size="50"
 										maxlength="50" />
 									<h:outputText for="numero" value="Numero:" />
-									<h:inputText id="numero"
-										disabled="#{clienteBean.cliente == null}"
+									<h:inputText id="numero" disabled="#{clienteBean.campos}"
 										value="#{clienteBean.endereco.numero}" size="10"
 										maxlength="10" />
 
@@ -207,8 +198,10 @@
 
 							<p:commandButton value="Novo" action="#"
 								actionListener="#{clienteBean.novo}" update="tabVCliente" />
-							<p:commandButton value="Editar" action="#" />
-							<p:commandButton value="Excluir" action="#" />
+							<p:commandButton value="Editar" action="#"
+								actionListener="#{clienteBean.cancelar}" update="tabVCliente" />
+							<p:commandButton value="Excluir" action="#" update="growl,tabVCliente"
+							 actionListener="#{clienteBean.excluir}" />
 							<p:commandButton value="Salvar" update="growl,tabVCliente"
 								actionListener="#{clienteBean.salvar}" />
 
@@ -229,42 +222,67 @@
 
 				</p:tab>
 
-				<p:tab>
+				<p:tab id="consulta">
+
+
 					<f:facet name="title">
 						<p:graphicImage value="/resources/img/search24x24.png" />
 					</f:facet>
-					<p:panel>
-					<p:dataTable id="clientes" emptyMessage="Nennhum cliente encontrado" var="cliente" value="#{clienteBean.clientes}" 
-					 selectionMode="single" rowKey="#{cliente.idCliente}" selection="#{clienteBean.selected}"  >
-					 <p:ajax event="rowSelect" update=":edicao" listener="#{clienteBean.onRowSelect}"/>
-					 
-					<p:column headerText="Id">
+					<h:form id="fConsulta" >
+						<h:panelGrid columns="5">
+
+							<h:outputLabel for="campoConsulta" value="Consulta por:" />
+							<h:selectOneMenu id="campoConsulta">
+								<f:selectItem itemLabel="ID" itemValue="ID" />
+								<f:selectItem itemLabel="NOME" itemValue="NOME" />
+								<f:selectItem itemLabel="CPF" itemValue="CPF" />
+							</h:selectOneMenu>
+							<h:inputText maxlength="30" size="30" value="" />
+							<p:commandLink>
+								<p:graphicImage value="/resources/img/search24x24.png" />
+							</p:commandLink>
+							<p:commandLink update="fConsulta:clientes" >
+								<p:graphicImage value="/resources/img/update24x24.png"  />
+							</p:commandLink>
+						</h:panelGrid>
+
+
+						<p:panel id="panelTabelaClientes">
+							<p:dataTable id="clientes"
+								emptyMessage="Nennhum cliente encontrado" var="cliente"
+								value="#{clienteBean.clientes}" selectionMode="single"
+								rowKey="#{cliente.idCliente}"
+								selection="#{clienteBean.selected}">
+								<p:ajax event="rowSelect" update=":edicao"
+									listener="#{clienteBean.onRowSelect}" />
+
+								<p:column headerText="Id">
 						#{cliente.idCliente}
 					</p:column>
-					
-					<p:column headerText="Nome">
+
+								<p:column headerText="Nome">
 						#{cliente.nome}
 					
 					</p:column>
-					
-					<p:column headerText="Cpf">
+
+								<p:column headerText="Cpf">
 						#{cliente.cpf}
 					
 					</p:column>
-					
-					<p:column headerText="Data Nascimento">
+
+								<p:column headerText="Data Nascimento">
 						#{cliente.dataNascimento}
 					
 					</p:column>
-					
-					
-					</p:dataTable >
-					
-					
-										
-					</p:panel>
 
 
+							</p:dataTable>
+
+
+
+						</p:panel>
+
+					</h:form>
 				</p:tab>
 
 			</p:tabView>

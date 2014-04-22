@@ -27,14 +27,14 @@ public class ClienteRN {
 	
 	public void salvar (Cliente cliente){
 		
-		//Integer idCliente = cliente.getIdCliente();
-		//if(idCliente==null){
+		Integer idCliente = cliente.getIdCliente();
+		if(idCliente==null){
 		clienteDAO.salvar(cliente);
-		//System.out.print("CLienteRN idCliente = 0 ou = NULL");
-		//}else{
-		//clienteDAO.alter(cliente);
-		//System.out.print("CLienteRN idCliente <> 0 ou <> NULL");
-		//}
+		System.out.print("CLienteRN idCliente = 0 ou = NULL");
+		}else{
+		clienteDAO.alter(cliente);
+		System.out.print("CLienteRN idCliente <> 0 ou <> NULL");
+		}
 		
 	}
 	public List consultaTodosCliente(){
