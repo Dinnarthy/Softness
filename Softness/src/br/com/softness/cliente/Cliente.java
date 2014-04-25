@@ -1,6 +1,6 @@
 package br.com.softness.cliente;
 
-import java.util.Calendar;
+
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -60,7 +60,7 @@ public class Cliente {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id")
-	Endereco endereco;
+	private Endereco endereco;
 
 	public Integer getIdCliente() {
 		return idCliente;

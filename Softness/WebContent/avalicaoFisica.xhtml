@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/Template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Softness - Avaliação Fisica</ui:define>
+
+	<ui:define name="centro">
+	<h:form id="teste">
+		<p:growl id="growl" showDetail="true" />
+
+		<fieldset>
+		<legend>Avaliação Fisica</legend>
+			<h:panelGrid id="pG1" columns="2">
+				<h:outputLabel for="idAvaliacaoFisica" value="Id:" />
+				<h:panelGrid id="pG2" columns="6">
+					<h:inputText id="idAvalicaoFisica" disabled="true" size="4"
+						maxlength="4" value="#{avaliacaoFisicaBean.avaliacaoFisica.idAvaliacaoFisica}" />
+					<h:outputLabel for="nomePaciente" value="Paciente:" />
+					<h:inputText id="nomePaciente" value="" size="80" maxlength="60" />
+					<p:commandLink>
+						<p:graphicImage value="/resources/img/search24x24.png" />
+					</p:commandLink>
+	<h:outputLabel for="dataCadastro" value="Data:" />
+					<h:outputText id="dataCadastro" value="#{avaliacaoFisicaBean.avaliacaoFisica.data}" />
+				</h:panelGrid>
+			</h:panelGrid>
+			<p:panel id="dados" header="Dados">
+				<h:panelGrid id="pG3" columns="2">
+					<h:outputLabel for="peso" value="Peso(kg):" />
+					<h:panelGrid id="pG4" columns="11">
+						<h:inputText id="peso" disabled="#{avaliacaoFisicaBean.avaliacaoFisica==null}"  size="5" value="#{avaliacaoFisicaBean.avaliacaoFisica.peso}" maxlength="5" />
+						<h:outputLabel for="altura" value="Altura(metros):" />
+						<h:inputText id="altura" value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}" size="5" maxlength="5" />
+						<h:outputLabel for="cintura" value="Cintura:" />
+						<h:inputText id="cintura" value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" size="3" maxlength="3" />
+						<h:outputLabel for="pescoco" value="Pescoço:" />
+						<h:inputText id="pescoco" value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" size="2" maxlength="2" />
+						<h:outputLabel for="quadril" value="Quadril:" />
+						<h:inputText id='quadril' value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" size="3" maxlength="3" />
+						<h:commandButton id="calcular" value="Calcular" />
+						<h:commandButton  id="add" value="Adicionar"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				</p:panel>
+				<p:panel id="resultadoAvaliacao" header="Resultado">
+				<h:panelGrid columns="2" >
+				<h:outputLabel for="resultadoGorduraCorporal" value="% de gordura corporal:" />
+				<h:panelGrid columns="4">
+				<h:inputText id="resultadoGorduraCorporal" value=""  disabled="true" />
+				<h:outputLabel  for="imc" value="IMC:"/>
+				<h:inputText id="imc" value="" disabled="true" />
+				<h:outputLabel for="situacaoImc" value="Situação IMC:" />
+				<h:outputText id="situacaiImc" value=""  />
+				</h:panelGrid>
+				</h:panelGrid>
+				
+				</p:panel>
+				<p:panel header="Acompanhamento" style="height:250px">
+				<p:dataTable id="acompanhamentos" var="acompanhamento" emptyMessage="Nenhum Acompanhamento Adicionado">
+				
+				<p:column headerText="Data">
+				
+				</p:column>
+				
+				<p:column headerText="Nome">
+				
+				</p:column>
+				
+				<p:column headerText="Peso">
+				
+				</p:column>
+				
+				<p:column headerText="Altura">
+				
+				</p:column>
+				
+				<p:column headerText="Cintura">
+				
+				</p:column>
+				
+				<p:column headerText="Pescoço">
+				
+				</p:column>
+				
+				<p:column headerText="Quadril">
+				
+				</p:column>
+				
+				<p:column headerText="% gordura">
+				
+				</p:column>
+				
+				<p:column headerText="IMC">
+				
+				</p:column>
+				
+				<p:column headerText="Situação">
+				
+				</p:column>
+				
+				</p:dataTable>
+				</p:panel>
+				<p:panel id="botoes">
+				
+						
+
+					
+				<p:commandButton id="novo" value="Novo" process="@this"  actionListener="#{avaliacaoFisicaBean.novo}" update="growl,teste" />
+				<h:commandButton id="editar" value="Editar"  />
+				<h:commandButton id="exluir" value="Exluir"  />
+				<p:commandButton id="salvar" value="Salvar" process="@this"  actionListener="#{avaliacaoFisicaBean.salvar}" update="growl,teste"  />
+					
+				
+				<h:commandButton id="cancelar" value="Cancelar" />
+		
+				
+				
+				
+				</p:panel>
+			
+					
+
+
+
+
+
+
+		</fieldset>
+</h:form>
+	</ui:define>
+
+
+
+</ui:composition>

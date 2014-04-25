@@ -10,16 +10,17 @@
 	<ui:define name="title">Softness - Cadastro Cliente</ui:define>
 
 	<ui:define name="centro">
-
+	<fieldset>
+	<legend>Cadastro Cliente</legend>
 		<h:form id="edicao">
 
-			<p:tabView id="tabVCliente" style="width:1024px">
+			<p:tabView id="tabVCliente" style="width:1024px" >
 				<h3>Cadastro de Clientes</h3>
 
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				<p:tab title="Cadastro">
 
-					<p:panel id="pCadastro">
+					
 
 						<h:panelGrid columns="2" id="pG1">
 							<h:outputLabel value="Id:" for="id" />
@@ -128,7 +129,7 @@
 								<h:panelGrid columns="5" id="pG7">
 									<h:selectOneMenu disabled="#{clienteBean.campos}"
 										id="tipoLogradouro"
-										value="clienteBean.endereco.tipoLogradouro">
+										value="#{clienteBean.endereco.tipoLogradouro}">
 										<f:selectItem itemLabel="Aeroporto" itemValue="aeroporto" />
 										<f:selectItem itemLabel="Alameda" itemValue="alameda" />
 										<f:selectItem itemLabel="Area" itemValue="area" />
@@ -212,7 +213,7 @@
 
 
 
-					</p:panel>
+					
 					<!-- Growl fora do h:panelGrid para renderizar via ajax -->
 					<h:form>
 
@@ -287,6 +288,7 @@
 
 			</p:tabView>
 		</h:form>
+		</fieldset>
 	</ui:define>
 
 </ui:composition>
