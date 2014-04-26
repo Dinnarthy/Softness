@@ -15,6 +15,10 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 
 	
 
+	public Session getSession() {
+		return session;
+	}
+
 	public void setSession(Session session) {
 		this.session = session;
 	}

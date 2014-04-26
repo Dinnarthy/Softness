@@ -18,20 +18,17 @@ import br.com.softness.cliente.Cliente;
 
 @Entity
 @Table(name="avaliacao_fisica")
-public class AvaliacaoFisica implements Serializable {
+public class AvaliacaoFisica  {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	@GeneratedValue
 	private Integer idAvaliacaoFisica;
 	
-	@OneToOne
-	@JoinColumn(name="cliente_id")
-	private Cliente cliente;
+	//@OneToOne
+	//@JoinColumn(name="cliente_id")
+	//private Cliente cliente;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="date")
@@ -75,13 +72,13 @@ public class AvaliacaoFisica implements Serializable {
 		this.idAvaliacaoFisica = idAvaliacaoFisica;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+	//public Cliente getCliente() {
+	//	return cliente;
+	//}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+	//public void setCliente(Cliente cliente) {
+		//this.cliente = cliente;
+	//}
 
 	public Date getData() {
 		return data;

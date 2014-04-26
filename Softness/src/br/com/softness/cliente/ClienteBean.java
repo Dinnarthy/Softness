@@ -47,8 +47,9 @@ public class ClienteBean  {
 
 	public void salvar(ActionEvent event){
 		 
-
-		
+			
+        System.out.print("--------------------Nome"+cliente.getNome());
+	
 		
 				cliente.setEndereco(endereco);
 				ClienteRN clienteRN = new ClienteRN();
@@ -79,9 +80,7 @@ public class ClienteBean  {
 		habilitarCampos();
 	}
 	
-	public void cancelar(ActionEvent event){
-		habilitarCampos();
-	}
+	
 	
 	public void excluir(ActionEvent event){
 		ClienteRN clienteRN = new ClienteRN();
