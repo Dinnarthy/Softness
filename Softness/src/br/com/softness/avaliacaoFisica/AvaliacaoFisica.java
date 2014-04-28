@@ -1,19 +1,18 @@
 package br.com.softness.avaliacaoFisica;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.softness.cliente.Cliente;
+
 
 
 @Entity
@@ -71,14 +70,6 @@ public class AvaliacaoFisica  {
 	public void setIdAvaliacaoFisica(Integer idAvaliacaoFisica) {
 		this.idAvaliacaoFisica = idAvaliacaoFisica;
 	}
-
-	//public Cliente getCliente() {
-	//	return cliente;
-	//}
-
-	//public void setCliente(Cliente cliente) {
-		//this.cliente = cliente;
-	//}
 
 	public Date getData() {
 		return data;
@@ -180,7 +171,16 @@ public class AvaliacaoFisica  {
 		return true;
 	}
 
+	//public Cliente getCliente() {
+	//	return cliente;
+	//}
+
+	//public void setCliente(Cliente cliente) {
+		//this.cliente = cliente;
+	//}
 	
 	
 
+	
+	
 }

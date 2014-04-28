@@ -30,7 +30,7 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 
 	public void salvar(AvaliacaoFisica user) {
 		session.save(user);
-
+		System.out.print("\n Passou pelo salvar AvaliacaoFisicaDAOHibernate \n");
 	}
 
 	public void delete(AvaliacaoFisica user) {

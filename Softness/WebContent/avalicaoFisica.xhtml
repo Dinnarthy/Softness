@@ -10,22 +10,27 @@
 
 	<ui:define name="centro">
 	
-<p:panel id="teste">	
+	
+<h:form prependId="false">
 <p:growl id="growl" showDetail="true" />
+
 		<!--  <fieldset>
 		<legend>Avaliação Fisica</legend>-->
 			<h:panelGrid id="pG1" columns="2">
 				<h:outputLabel for="idAvaliacaoFisica" value="Id:" />
 				<h:panelGrid id="pG2" columns="6">
-					<h:inputText id="idAvalicaoFisica" disabled="true" size="4"
+					<h:inputText id="idAvalicaoFisica" disabled="true" value="#{avaliacaoFisicaBean.avaliacaoFisica.idAvaliacaoFisica}" size="4"
 						maxlength="4"  />
 					<h:outputLabel for="nomePaciente" value="Paciente:" />
-					<h:inputText id="nomePaciente" value="" size="80" maxlength="60" />
+					<h:inputText id="nomePaciente"  size="80" maxlength="60" />
 					<p:commandLink>
 						<p:graphicImage value="/resources/img/search24x24.png" />
 					</p:commandLink>
 	<h:outputLabel for="dataCadastro" value="Data:" />
-					<h:outputText id="dataCadastro" value="#{avaliacaoFisicaBean.avaliacaoFisica.data}" />
+					<h:outputText id="dataCadastro" value="#{avaliacaoFisicaBean.avaliacaoFisica.data}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date"
+										timeZone="GMT-3" />
+					</h:outputText>
 				</h:panelGrid>
 			</h:panelGrid>
 			<!--  <p:panel id="dados" header="Dados">-->
@@ -34,14 +39,14 @@
 					<h:panelGrid id="pG4" columns="11">
 						<h:inputText id="peso"   size="5" disabled="#{avaliacaoFisicaBean.campos}" value="#{avaliacaoFisicaBean.avaliacaoFisica.peso}" maxlength="5" />
 						<h:outputLabel for="altura" value="Altura(metros):" />
-						<h:inputText id="altura"  size="5" maxlength="5" value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}" />
+						<h:inputText id="altura"  size="5" disabled="#{avaliacaoFisicaBean.campos}" maxlength="5" value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}" />
 						<h:outputLabel for="cintura" value="Cintura:" />
-						<h:inputText id="cintura" size="3" maxlength="3" value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" />
+						<h:inputText id="cintura" size="3" disabled="#{avaliacaoFisicaBean.campos}" maxlength="3" value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" />
 						<h:outputLabel for="pescoco" value="Pescoço:" />
-						<h:inputText id="pescoco"  size="2" maxlength="2" value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" />
+						<h:inputText id="pescoco"  size="2" disabled="#{avaliacaoFisicaBean.campos}" maxlength="2" value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" />
 						<h:outputLabel for="quadril" value="Quadril:" />
-						<h:inputText id="quadril" size="3" maxlength="3" value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" />
-						<p:commandButton id="calcular" value="Calcular" update="teste" />
+						<h:inputText id="quadril" size="3" disabled="#{avaliacaoFisicaBean.campos}" maxlength="3" value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" />
+						<p:commandButton id="calcular" value="Calcular" actionListener="#{avaliacaoFisicaBean.calcularImc}" update="imc" />
 						<p:commandButton  id="add" value="Adicionar"/>
 					</h:panelGrid>
 				</h:panelGrid>
@@ -50,11 +55,13 @@
 				<h:panelGrid columns="2" >
 				<h:outputLabel for="resultadoGorduraCorporal" value="% de gordura corporal:" />
 				<h:panelGrid columns="4">
-				<h:inputText id="resultadoGorduraCorporal" value="#{avaliacaoFisicaBean.avaliacaoFisica.taxaGordura}"  disabled="true" />
+				<h:inputText id="resultadoGorduraCorporal"   />
 				<h:outputLabel  for="imc" value="IMC:"/>
-				<h:inputText id="imc" value="" disabled="true" />
+				<h:inputText id="imc" value="#{avaliacaoFisicaBean.resultadoImc}" >
+					<f:convertNumber pattern="#0.00" />
+				</h:inputText>
 				<h:outputLabel for="situacaoImc" value="Situação IMC:" />
-				<h:outputText id="situacaiImc" value="#{avaliacaoFisicaBean.avaliacaoFisica.situacaoImc}"  />
+				<h:outputText id="situacaiImc"   />
 				</h:panelGrid>
 				</h:panelGrid>
 				
@@ -105,28 +112,28 @@
 				</p:dataTable>
 				</p:panel>-->
 				
-				</p:panel>	
+					
 				<p:panel >
-				<h:form>
+				
 				
 					
 
 					
-				<p:commandButton id="novo" value="Novo"    update=":teste" actionListener="#{avaliacaoFisicaBean.novo}" />
+				<p:commandButton id="novo" value="Novo"   ajax="false"  actionListener="#{avaliacaoFisicaBean.novo}" />
 				<p:commandButton id="editar" value="Editar"  />
 				<p:commandButton id="exluir" value="Exluir"  />
-				<p:commandButton id="salvar" value="Salvar"    actionListener="#{avaliacaoFisicaBean.salvar}" update=":teste"  />
+				<p:commandButton id="salvar" value="Salvar" ajax="false"  actionListener="#{avaliacaoFisicaBean.salvar}"   />
 					
 				
 				<p:commandButton id="cancelar" value="Cancelar"   />
 		
-				</h:form>
+				
 				
 									
 
 
 				</p:panel>
-			
+			</h:form>
 				
 		
 
