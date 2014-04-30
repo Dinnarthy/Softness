@@ -2,6 +2,7 @@ package br.com.softness.cliente;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,11 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.softness.avaliacaoFisica.AvaliacaoFisica;
 import br.com.softness.endereco.Endereco;
 
 @Entity
@@ -23,6 +26,9 @@ public class Cliente {
 	@Id
 	@GeneratedValue
 	private Integer idCliente;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<AvaliacaoFisica> avaliacoes;
 
 	@Column(name = "nome", nullable = false)
 	private String nome;
@@ -165,6 +171,16 @@ public class Cliente {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	
+
+	public List<AvaliacaoFisica> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<AvaliacaoFisica> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 
 	@Override

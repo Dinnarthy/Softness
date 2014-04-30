@@ -3,14 +3,20 @@ package br.com.softness.avaliacaoFisica;
 
 import java.util.Date;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.softness.cliente.Cliente;
 
 
 
@@ -25,9 +31,9 @@ public class AvaliacaoFisica  {
 	@GeneratedValue
 	private Integer idAvaliacaoFisica;
 	
-	//@OneToOne
-	//@JoinColumn(name="cliente_id")
-	//private Cliente cliente;
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="date")
@@ -141,6 +147,16 @@ public class AvaliacaoFisica  {
 
 	public void setSituacaoImc(String situacaoImc) {
 		this.situacaoImc = situacaoImc;
+	}
+	
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override

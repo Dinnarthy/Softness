@@ -116,7 +116,7 @@ public class ClienteBean  {
 		
         this.cliente = (Cliente) event.getObject();  
        this.endereco  = cliente.getEndereco();
-       System.out.print("ID"+ cliente.getIdCliente());
+       System.out.print("ID-------"+ cliente.getIdCliente());
        
     }
 	 
