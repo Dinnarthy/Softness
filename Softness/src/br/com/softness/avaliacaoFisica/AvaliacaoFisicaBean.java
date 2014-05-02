@@ -28,7 +28,7 @@ public class AvaliacaoFisicaBean {
 	private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
 	private Cliente cliente;
 	private String nomeCliente;
-	private Cliente cliente2 = new Cliente();;
+	private Cliente cliente2 ;
 	private AvaliacaoFisica avaliacaoFisica ;
 	
 	
@@ -38,15 +38,23 @@ public class AvaliacaoFisicaBean {
 	}
 	@PostConstruct
 	public void init(){
-		cliente = new Cliente();
+		
+		
 		desabilitarCampos();
 								}
 	public String cancelar(){
 		return "avaliacaoFisica.xhtml";
 	}
 	
-public void onRowSelect(SelectEvent event) {
+	public void adicionar(ActionEvent event){
+		listaAvaliacaoFisica.add(avaliacaoFisica);
 		
+		
+		
+	}
+	
+public void onRowSelect(SelectEvent event) {
+		habilitarCampos();
         this.cliente = (Cliente) event.getObject(); 
         nomeCliente=cliente.getNome();
         cliente2 = cliente;
@@ -97,7 +105,7 @@ public void setSelected(Cliente selected) {
 		alturaDouble = alturaDouble / 100;
 		Double pesoDouble = Double.parseDouble(avaliacaoFisica.getPeso());
 		resultadoImc = pesoDouble/(alturaDouble*alturaDouble);
-		calcularSituacaoImc();
+		
 		String resultadoImc2 = String.valueOf(resultadoImc);
 		avaliacaoFisica.setImc(resultadoImc2);
 		if(cliente==null){
@@ -116,6 +124,7 @@ public void setSelected(Cliente selected) {
 		
 		calcularTaxaDeGordura();
 		calcularImc();
+		calcularSituacaoImc();
 	}
 	
 	public void calcularSituacaoImc(){
@@ -167,7 +176,7 @@ public void setSelected(Cliente selected) {
 
 	public void novo(ActionEvent event) {
 		avaliacaoFisica = new AvaliacaoFisica();
-		habilitarCampos();
+		
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Entrou no Novo"));
