@@ -80,6 +80,15 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 		c.add(Restrictions.eq("idCliente", 2));  
 		return c.list();
 	}
+	
+	
+
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf() {
+		Criteria crit = session.createCriteria(AvaliacaoFisica.class);
+		Criteria crit2 = crit.createCriteria("cliente");
+		crit2.add(Restrictions.eq("cpf", "11111111111"));
+		return crit2.list();
+	}
 
 	public List<AvaliacaoFisica> listar() {
 		// TODO Auto-generated method stub

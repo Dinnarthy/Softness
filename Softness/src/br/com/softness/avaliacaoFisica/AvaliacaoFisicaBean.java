@@ -41,7 +41,7 @@ public class AvaliacaoFisicaBean {
 	@PostConstruct
 	public void init(){
 		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
-		listaAvaliacaoFisica = avaliacaoFisicaRN.listarAvaliacaoFisicaByNome();
+		listaAvaliacaoFisica = avaliacaoFisicaRN.listarAvaliacaoFisicaByCpf();
 		
 		
 		
@@ -51,6 +51,11 @@ public class AvaliacaoFisicaBean {
 	public String cancelar(){
 		return "avaliacaoFisica.xhtml";
 	}
+	
+	public void pesquisarAvaliacaoFisica(){
+		
+	}
+	
 	
 	public void adicionar(ActionEvent event){
 		listaAvaliacaoFisica.add(avaliacaoFisica);

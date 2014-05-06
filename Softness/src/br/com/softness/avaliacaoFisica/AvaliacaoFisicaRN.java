@@ -45,4 +45,8 @@ public class AvaliacaoFisicaRN {
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome() {
 		return avaliacaoFisicaDAO.listarAvaliacaoFisicaByNome2();
 	}
+	
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf(){
+		return avaliacaoFisicaDAO.listarAvaliacaoFisicaByCpf();
+	}
 }

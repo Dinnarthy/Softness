@@ -12,57 +12,57 @@
 
 
 		<h:form id="edicao">
-		
-		<p:tabView id="tBAvaliacao">
-		
-		<p:tab title="Cadastro">
-		<p:growl id="growl" showDetail="true" />	
 
-			
-				<h:panelGrid id="pG1" columns="2">
-					<h:outputLabel for="idAvaliacaoFisica" value="Id:" />
-					<h:panelGrid id="pG2" columns="9">
-						<h:inputText id="idAvalicaoFisica" disabled="true"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.idAvaliacaoFisica}"
-							size="4" maxlength="4" />
-						<h:outputLabel for="nomePaciente" value="Paciente:" />
-						<h:inputText id="nomePaciente" disabled="true" immediate="true"
-							size="80" maxlength="60"
-							value="#{avaliacaoFisicaBean.nomeCliente}" />
-						<p:commandLink onclick="consultaCliente.show()"
-							disable="#{avaliacaoFisicaBean.avaliacaoFisica==null}">
-							<p:graphicImage value="/resources/img/search24x24.png" />
-						</p:commandLink>
-						<!-- **************************INICIO Dialog ConsultaCliente*************************** -->
-						<p:dialog id="dialogConsutaCliente" header="Consultar Cliente"
-							draggable="true" width="800" height="600"
-							widgetVar="consultaCliente" closable="true" resizable="false"
-							appendToBody="true" modal="true" minimizable="false">
+			<p:tabView id="tBAvaliacao">
+
+				<p:tab title="Cadastro">
+					<p:growl id="growl" showDetail="true" />
+
+
+					<h:panelGrid id="pG1" columns="2">
+						<h:outputLabel for="idAvaliacaoFisica" value="Id:" />
+						<h:panelGrid id="pG2" columns="9">
+							<h:inputText id="idAvalicaoFisica" disabled="true"
+								value="#{avaliacaoFisicaBean.avaliacaoFisica.idAvaliacaoFisica}"
+								size="4" maxlength="4" />
+							<h:outputLabel for="nomePaciente" value="Paciente:" />
+							<h:inputText id="nomePaciente" disabled="true" immediate="true"
+								size="80" maxlength="60"
+								value="#{avaliacaoFisicaBean.nomeCliente}" />
+							<p:commandLink onclick="consultaCliente.show()"
+								disable="#{avaliacaoFisicaBean.avaliacaoFisica==null}">
+								<p:graphicImage value="/resources/img/search24x24.png" />
+							</p:commandLink>
+							<!-- **************************INICIO Dialog ConsultaCliente*************************** -->
+							<p:dialog id="dialogConsutaCliente" header="Consultar Cliente"
+								draggable="true" width="800" height="600"
+								widgetVar="consultaCliente" closable="true" resizable="false"
+								appendToBody="true" modal="true" minimizable="false">
 					Pesquisa:
 							<br />
-							<h:inputText id="pesquisaCliente" size="40" />
-							<h:commandButton id="botaoPesquisa" value="Buscar" />
-							<br />
-							<p:dataTable id="tablePesquisaCliente"
-								emptyMessage="Nennhum cliente encontrado" var="cliente"
-								value="#{clienteBean.clientes}" selectionMode="single"
-								rowKey="#{cliente.nome}"
-								selection="#{avaliacaoFisicaBean.selected}">
-								<p:ajax event="rowSelect"
-									listener="#{avaliacaoFisicaBean.onRowSelect}"
-									update=":edicao:tBAvaliacao:nomePaciente,:edicao:tBAvaliacao:peso,:edicao:tBAvaliacao:altura,
+								<h:inputText id="pesquisaCliente" size="40" />
+								<h:commandButton id="botaoPesquisa" value="Buscar" />
+								<br />
+								<p:dataTable id="tablePesquisaCliente"
+									emptyMessage="Nennhum cliente encontrado" var="cliente"
+									value="#{clienteBean.clientes}" selectionMode="single"
+									rowKey="#{cliente.nome}"
+									selection="#{avaliacaoFisicaBean.selected}">
+									<p:ajax event="rowSelect"
+										listener="#{avaliacaoFisicaBean.onRowSelect}"
+										update=":edicao:tBAvaliacao:nomePaciente,:edicao:tBAvaliacao:peso,:edicao:tBAvaliacao:altura,
 									:edicao:tBAvaliacao:cintura,:edicao:tBAvaliacao:pescoco"
-									oncomplete="consultaCliente.hide()" />
-								<p:column headerText="Id">
+										oncomplete="consultaCliente.hide()" />
+									<p:column headerText="Id">
 						#{cliente.idCliente}
 					</p:column>
 
-								<p:column headerText="Nome">
+									<p:column headerText="Nome">
 						#{cliente.nome}
 					
 					</p:column>
 
-								<p:column headerText="Cpf">
+									<p:column headerText="Cpf">
 						#{cliente.cpf}
 					
 					</p:column>
@@ -71,190 +71,206 @@
 
 
 
-							</p:dataTable>
-						</p:dialog>
-						<!-- **************************FIM Dialog ConsultaCliente*************************** -->
+								</p:dataTable>
+							</p:dialog>
+							<!-- **************************FIM Dialog ConsultaCliente*************************** -->
 
 
 
-						<h:outputLabel for="dataCadastro" value="Data:" />
-						<h:outputText id="dataCadastro"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.data}">
-							<f:convertDateTime pattern="dd/MM/yyyy" type="date"
-								timeZone="GMT-3" />
-						</h:outputText>
+							<h:outputLabel for="dataCadastro" value="Data:" />
+							<h:outputText id="dataCadastro"
+								value="#{avaliacaoFisicaBean.avaliacaoFisica.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" type="date"
+									timeZone="GMT-3" />
+							</h:outputText>
+						</h:panelGrid>
 					</h:panelGrid>
-				</h:panelGrid>
-				<fieldset>
-				<legend>Dados</legend>
-				<h:panelGrid id="pG3" columns="2">
-					<h:outputLabel for="peso" value="Peso(kg):" />
-					<h:panelGrid id="pG4" columns="11">
-						<h:inputText id="peso" requiredMessage="Peso Obrigatório" size="5"
-							disabled="#{avaliacaoFisicaBean.campos}"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.peso}" maxlength="5" />
-						<h:outputLabel for="altura" value="Altura(metros):" />
-						<h:inputText id="altura" size="5"
-							requiredMessage="Altura Obrigatório"
-							disabled="#{avaliacaoFisicaBean.campos}" maxlength="5"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}">
+					<fieldset>
+						<legend>Dados</legend>
+						<h:panelGrid id="pG3" columns="2">
+							<h:outputLabel for="peso" value="Peso(kg):" />
+							<h:panelGrid id="pG4" columns="11">
+								<h:inputText id="peso" requiredMessage="Peso Obrigatório"
+									size="5" disabled="#{avaliacaoFisicaBean.campos}"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.peso}"
+									maxlength="5" />
+								<h:outputLabel for="altura" value="Altura(metros):" />
+								<h:inputText id="altura" size="5"
+									requiredMessage="Altura Obrigatório"
+									disabled="#{avaliacaoFisicaBean.campos}" maxlength="5"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}">
 
-						</h:inputText>
-						<h:outputLabel for="cintura" value="Cintura:" />
-						<h:inputText id="cintura" size="3"
-							disabled="#{avaliacaoFisicaBean.campos}"
-							requiredMessage="Cintura Obrigatório" maxlength="3"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" />
-						<h:outputLabel for="pescoco" value="Pescoço:" />
-						<h:inputText id="pescoco" size="2"
-							disabled="#{avaliacaoFisicaBean.campos}"
-							requiredMessage="Pescoço Obrigatório" maxlength="2"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" />
-						<h:outputLabel for="quadril" value="Quadril:" />
-						<h:inputText id="quadril" size="3" disabled="true" maxlength="3"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" />
-						<p:commandButton id="calcular" value="Calcular"
-							actionListener="#{avaliacaoFisicaBean.calcular}"
-							update="imc,situacaoImc,resultadoGorduraCorporal,growl" />
-						<p:commandButton id="add" value="Adicionar" actionListener="#{avaliacaoFisicaBean.adicionar}" update="acompanhamentos"  />
-						
-
-
-					</h:panelGrid>
-				</h:panelGrid>
+								</h:inputText>
+								<h:outputLabel for="cintura" value="Cintura:" />
+								<h:inputText id="cintura" size="3"
+									disabled="#{avaliacaoFisicaBean.campos}"
+									requiredMessage="Cintura Obrigatório" maxlength="3"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" />
+								<h:outputLabel for="pescoco" value="Pescoço:" />
+								<h:inputText id="pescoco" size="2"
+									disabled="#{avaliacaoFisicaBean.campos}"
+									requiredMessage="Pescoço Obrigatório" maxlength="2"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" />
+								<h:outputLabel for="quadril" value="Quadril:" />
+								<h:inputText id="quadril" size="3" disabled="true" maxlength="3"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" />
+								<p:commandButton id="calcular" value="Calcular"
+									actionListener="#{avaliacaoFisicaBean.calcular}"
+									update="imc,situacaoImc,resultadoGorduraCorporal,growl" />
+								<p:commandButton id="add" value="Adicionar"
+									actionListener="#{avaliacaoFisicaBean.adicionar}"
+									update="acompanhamentos" />
 
 
-				<h:panelGrid columns="2">
-					<h:outputLabel for="resultadoGorduraCorporal"
-						value="% de gordura corporal:" />
-					<h:panelGrid columns="5">
-						<h:inputText id="resultadoGorduraCorporal" disabled="true"
-							value="#{avaliacaoFisicaBean.taxaGordura}">
-							<f:convertNumber pattern="#0.00" />
-						</h:inputText>
-						<h:outputLabel for="imc" value="IMC:" />
-						<h:inputText id="imc" disabled="true"
-							value="#{avaliacaoFisicaBean.resultadoImc}">
-							<f:convertNumber pattern="#0.00" />
-						</h:inputText>
-						<h:outputLabel for="situacaoImc" value="Situação IMC:" />
-						<h:outputText id="situacaoImc"
-							value="#{avaliacaoFisicaBean.avaliacaoFisica.situacaoImc}" />
-					</h:panelGrid>
-				</h:panelGrid>
 
-</fieldset>
-					
-					<p:dataTable id="acompanhamentos" var="acompanhamento" scrollable="true" scrollWidth="1320"
-						emptyMessage="Nenhum Acompanhamento Adicionado" >
-								<!--  value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" --> 
-								 
-								
-								
+							</h:panelGrid>
+						</h:panelGrid>
 
-						<p:column headerText="Data" >
-						<h:outputText value="#{acompanhamento.data}" >
-						<f:convertDateTime pattern="dd/MM/yyyy" 
-								/>
-						</h:outputText>
-						
-						
+
+						<h:panelGrid columns="2">
+							<h:outputLabel for="resultadoGorduraCorporal"
+								value="% de gordura corporal:" />
+							<h:panelGrid columns="5">
+								<h:inputText id="resultadoGorduraCorporal" disabled="true"
+									value="#{avaliacaoFisicaBean.taxaGordura}">
+									<f:convertNumber pattern="#0.00" />
+								</h:inputText>
+								<h:outputLabel for="imc" value="IMC:" />
+								<h:inputText id="imc" disabled="true"
+									value="#{avaliacaoFisicaBean.resultadoImc}">
+									<f:convertNumber pattern="#0.00" />
+								</h:inputText>
+								<h:outputLabel for="situacaoImc" value="Situação IMC:" />
+								<h:outputText id="situacaoImc"
+									value="#{avaliacaoFisicaBean.avaliacaoFisica.situacaoImc}" />
+							</h:panelGrid>
+						</h:panelGrid>
+
+					</fieldset>
+
+					<p:dataTable id="acompanhamentos" var="acompanhamento"
+						scrollable="true" scrollWidth="1320"
+						emptyMessage="Nenhum Acompanhamento Adicionado">
+						<!--  value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" -->
+
+
+
+
+						<p:column headerText="Data">
+							<h:outputText value="#{acompanhamento.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+
+
 						</p:column>
 
-						
+
 
 						<p:column headerText="Peso">
-						<h:outputText value="#{acompanhamento.peso}" />
-						
+							<h:outputText value="#{acompanhamento.peso}" />
+
 						</p:column>
 
 						<p:column headerText="Altura">
-						<h:outputText value="#{acompanhamento.altura}" />
-						
+							<h:outputText value="#{acompanhamento.altura}" />
+
 						</p:column>
 
 						<p:column headerText="Cintura">
-						<h:outputText value="#{acompanhamento.cintura}" />
-						
+							<h:outputText value="#{acompanhamento.cintura}" />
+
 						</p:column>
 
 						<p:column headerText="Pescoço">
-						<h:outputText value="#{acompanhamento.pescoco}" />
-						
+							<h:outputText value="#{acompanhamento.pescoco}" />
+
 						</p:column>
 
 						<p:column headerText="Quadril">
-						<h:outputText value="#{acompanhamento.quadril}" />
-						
+							<h:outputText value="#{acompanhamento.quadril}" />
+
 						</p:column>
 
 						<p:column headerText="% gordura">
-						<h:outputText value="#{acompanhamento.taxaGordura}" >
-						<f:convertNumber pattern="#0.00" />
-						</h:outputText>
-						
-						
+							<h:outputText value="#{acompanhamento.taxaGordura}">
+								<f:convertNumber pattern="#0.00" />
+							</h:outputText>
+
+
 						</p:column>
 
-						<p:column headerText="IMC" >
-						<h:outputText value="#{acompanhamento.imc}" >
-						<f:convertNumber pattern="#0.00" />
-						</h:outputText>
-						
+						<p:column headerText="IMC">
+							<h:outputText value="#{acompanhamento.imc}">
+								<f:convertNumber pattern="#0.00" />
+							</h:outputText>
+
 						</p:column>
 
 						<p:column headerText="Situação">
-						<h:outputText value="#{acompanhamento.situacaoImc}" />
-						
+							<h:outputText value="#{acompanhamento.situacaoImc}" />
+
 						</p:column>
 
 					</p:dataTable>
-				
-
-
-				<p:panel>
 
 
 
-
-
-					<p:commandButton id="novo" value="Novo"
-						actionListener="#{avaliacaoFisicaBean.novo}" immediate="true"
-						ajax="false" />
-					<p:commandButton id="editar" value="Editar" />
-					<p:commandButton id="exluir" value="Exluir" />
-					<p:commandButton id="salvar" value="Salvar" ajax="false"
-						actionListener="#{avaliacaoFisicaBean.salvar}" />
-
-
-					<p:commandButton id="cancelar" value="Cancelar" ajax="false"
-						immediate="true" process="@form"
-						action="#{avaliacaoFisicaBean.cancelar}" />
+					<p:panel>
 
 
 
 
 
+						<p:commandButton id="novo" value="Novo"
+							actionListener="#{avaliacaoFisicaBean.novo}" update=":edicao" />
+						<p:commandButton id="editar" value="Editar" />
+						<p:commandButton id="exluir" value="Exluir" />
+						<p:commandButton id="salvar" value="Salvar" update=":edicao"
+							actionListener="#{avaliacaoFisicaBean.salvar}" />
 
-				</p:panel>
-</p:tab>
-<p:tab title="Consulta">
-<fieldset>
-<legend>Consulta Avaliacão</legend>
-<p:dataTable id="consultaAvaliacao" var="avaliacoes" emptyMessage="Nenhuma AvaliacaoFisica Cadastrado"
- value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" >
 
-<p:column headerText="Id">
+						<p:commandButton id="cancelar" value="Cancelar" ajax="false"
+							immediate="true" process="@form"
+							action="#{avaliacaoFisicaBean.cancelar}" />
+
+
+
+
+
+
+					</p:panel>
+				</p:tab>
+				<p:tab title="Consulta">
+					<fieldset>
+						<legend>Consulta Avaliacão</legend>
+						Consulta:
+						<h:selectOneMenu>
+							<f:selectItem itemLabel="ID" />
+							<f:selectItem itemLabel="CPF" />
+							<f:selectItem itemLabel="NOME" />
+
+						</h:selectOneMenu>
+						<h:inputText value="" size="10" />
+						<p:commandLink>
+							<p:graphicImage value="/resources/img/search24x24.png" />
+						</p:commandLink>
+						
+
+						<p:dataTable id="consultaAvaliacao" var="avaliacoes"
+							emptyMessage="Nenhuma AvaliacaoFisica Cadastrado"
+							value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}">
+
+							<p:column headerText="Id">
 #{avaliacoes.idAvaliacaoFisica}
 
 </p:column>
 
-<p:column headerText="CPF">
+							<p:column headerText="CPF">
 #{avaliacoes.cliente.cpf}
 
 </p:column>
 
-<p:column headerText="Nome">
+							<p:column headerText="Nome">
 #{avaliacoes.cliente.nome}
 
 </p:column>
@@ -263,23 +279,23 @@
 
 
 
-</p:dataTable>
+						</p:dataTable>
 
 
 
 
 
-</fieldset>
+					</fieldset>
 
 
-</p:tab>
+				</p:tab>
 
 
 
 
 
-			
-	</p:tabView>
+
+			</p:tabView>
 		</h:form>
 	</ui:define>
 

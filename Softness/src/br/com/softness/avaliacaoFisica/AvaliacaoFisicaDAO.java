@@ -25,5 +25,7 @@ public List consultaTodasAvaliacoesFisica();
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome(Integer idCliente);
 	
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome2();
+	
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf();
 
 }
