@@ -12,10 +12,13 @@
 
 
 		<h:form id="edicao">
-			<p:growl id="growl" showDetail="true" />
+		
+		<p:tabView id="tBAvaliacao">
+		
+		<p:tab title="Cadastro">
+		<p:growl id="growl" showDetail="true" />	
 
-			<fieldset>
-				<legend>Avaliação Fisica</legend>
+			
 				<h:panelGrid id="pG1" columns="2">
 					<h:outputLabel for="idAvaliacaoFisica" value="Id:" />
 					<h:panelGrid id="pG2" columns="9">
@@ -47,8 +50,8 @@
 								selection="#{avaliacaoFisicaBean.selected}">
 								<p:ajax event="rowSelect"
 									listener="#{avaliacaoFisicaBean.onRowSelect}"
-									update=":edicao:nomePaciente,:edicao:peso,:edicao:altura,
-									:edicao:cintura,:edicao:pescoco"
+									update=":edicao:tBAvaliacao:nomePaciente,:edicao:tBAvaliacao:peso,:edicao:tBAvaliacao:altura,
+									:edicao:tBAvaliacao:cintura,:edicao:tBAvaliacao:pescoco"
 									oncomplete="consultaCliente.hide()" />
 								<p:column headerText="Id">
 						#{cliente.idCliente}
@@ -82,7 +85,8 @@
 						</h:outputText>
 					</h:panelGrid>
 				</h:panelGrid>
-				<!--  <p:panel id="dados" header="Dados">-->
+				<fieldset>
+				<legend>Dados</legend>
 				<h:panelGrid id="pG3" columns="2">
 					<h:outputLabel for="peso" value="Peso(kg):" />
 					<h:panelGrid id="pG4" columns="11">
@@ -139,54 +143,69 @@
 					</h:panelGrid>
 				</h:panelGrid>
 
-
+</fieldset>
 					
 					<p:dataTable id="acompanhamentos" var="acompanhamento" scrollable="true" scrollWidth="1320"
-						emptyMessage="Nenhum Acompanhamento Adicionado" 
-								value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}"  >
+						emptyMessage="Nenhum Acompanhamento Adicionado" >
+								<!--  value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" --> 
 								 
 								
 								
 
 						<p:column headerText="Data" >
-						#{acompanhamento.data}
+						<h:outputText value="#{acompanhamento.data}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" 
+								/>
+						</h:outputText>
+						
 						
 						</p:column>
 
-						<p:column headerText="Nome">
 						
-						</p:column>
 
 						<p:column headerText="Peso">
-						#{acompanhamento.peso}
+						<h:outputText value="#{acompanhamento.peso}" />
+						
 						</p:column>
 
 						<p:column headerText="Altura">
-						#{acompanhamento.altura}
+						<h:outputText value="#{acompanhamento.altura}" />
+						
 						</p:column>
 
 						<p:column headerText="Cintura">
-						#{acompanhamento.cintura}
+						<h:outputText value="#{acompanhamento.cintura}" />
+						
 						</p:column>
 
 						<p:column headerText="Pescoço">
-						#{acompanhamento.pescoco}
+						<h:outputText value="#{acompanhamento.pescoco}" />
+						
 						</p:column>
 
 						<p:column headerText="Quadril">
-						#{acompanhamento.quadril}
+						<h:outputText value="#{acompanhamento.quadril}" />
+						
 						</p:column>
 
 						<p:column headerText="% gordura">
-						#{acompanhamento.taxaGordura}
+						<h:outputText value="#{acompanhamento.taxaGordura}" >
+						<f:convertNumber pattern="#0.00" />
+						</h:outputText>
+						
+						
 						</p:column>
 
-						<p:column headerText="IMC">
-
+						<p:column headerText="IMC" >
+						<h:outputText value="#{acompanhamento.imc}" >
+						<f:convertNumber pattern="#0.00" />
+						</h:outputText>
+						
 						</p:column>
 
 						<p:column headerText="Situação">
-
+						<h:outputText value="#{acompanhamento.situacaoImc}" />
+						
 						</p:column>
 
 					</p:dataTable>
@@ -218,14 +237,49 @@
 
 
 				</p:panel>
+</p:tab>
+<p:tab title="Consulta">
+<fieldset>
+<legend>Consulta Avaliacão</legend>
+<p:dataTable id="consultaAvaliacao" var="avaliacoes" emptyMessage="Nenhuma AvaliacaoFisica Cadastrado"
+ value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" >
+
+<p:column headerText="Id">
+#{avaliacoes.idAvaliacaoFisica}
+
+</p:column>
+
+<p:column headerText="CPF">
+#{avaliacoes.cliente.cpf}
+
+</p:column>
+
+<p:column headerText="Nome">
+#{avaliacoes.cliente.nome}
+
+</p:column>
 
 
 
 
 
+</p:dataTable>
 
-			</fieldset>
 
+
+
+
+</fieldset>
+
+
+</p:tab>
+
+
+
+
+
+			
+	</p:tabView>
 		</h:form>
 	</ui:define>
 

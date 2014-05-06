@@ -1,8 +1,11 @@
 package br.com.softness.avaliacaoFisica;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.softness.cliente.Cliente;
 
@@ -54,8 +57,28 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 	}
 
 	public AvaliacaoFisica getByNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	return null;	
+	}
+	
+	
+	
+	
+	
+
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome(Integer idCliente) {
+		List<AvaliacaoFisica> resultado = new ArrayList<AvaliacaoFisica>();
+		Criteria crit = session.createCriteria(AvaliacaoFisica.class);
+		crit.add(Restrictions.eq("cliente", idCliente));
+		return resultado;
+		
+	}
+	
+	
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome2() {
+		Criteria c1 = session.createCriteria(AvaliacaoFisica.class);  
+		Criteria c = c1.createCriteria("cliente");  
+		c.add(Restrictions.eq("idCliente", 2));  
+		return c.list();
 	}
 
 	public List<AvaliacaoFisica> listar() {

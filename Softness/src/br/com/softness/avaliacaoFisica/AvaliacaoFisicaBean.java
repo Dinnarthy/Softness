@@ -25,7 +25,9 @@ public class AvaliacaoFisicaBean {
 	private boolean campos ;
 	private Double resultadoImc;
 	private Double taxaGordura;
-	private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
+	//private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
+	private List<AvaliacaoFisica> listaAvaliacaoFisica ;
+
 	private Cliente cliente;
 	private String nomeCliente;
 	private Cliente cliente2 ;
@@ -38,6 +40,10 @@ public class AvaliacaoFisicaBean {
 	}
 	@PostConstruct
 	public void init(){
+		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
+		listaAvaliacaoFisica = avaliacaoFisicaRN.listarAvaliacaoFisicaByNome();
+		
+		
 		
 		
 		desabilitarCampos();
