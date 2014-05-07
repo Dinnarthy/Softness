@@ -1,11 +1,10 @@
-package br.com.softness.avaliacaoFisica;
-
+package br.com.softness.acompanhamentoFisico;
 
 import java.util.Date;
 
 
 
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,33 +12,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.softness.acompanhamentoFisico.AcompanhamentoFisico;
-import br.com.softness.cliente.Cliente;
+import br.com.softness.avaliacaoFisica.AvaliacaoFisica;
+
 
 
 
 
 @Entity
-@Table(name="avaliacao_fisica")
-public class AvaliacaoFisica  {
+@Table(name="acompanhamento_fisico")
+public class AcompanhamentoFisico  {
 	
 	
 
 	@Id
 	@GeneratedValue
-	private Integer idAvaliacaoFisica;
-	
-	@OneToMany(mappedBy="avaliacaoFisica")
-	private List<AcompanhamentoFisico> acompanhamentos;
+	private Integer idAcompanhamentoFisico;
 	
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name="avaliacao_id")
+	private AvaliacaoFisica avaliacaoFisica;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="date")
@@ -75,12 +70,14 @@ public class AvaliacaoFisica  {
 	
 	
 
-	public Integer getIdAvaliacaoFisica() {
-		return idAvaliacaoFisica;
+	
+
+	public Integer getIdAcompanhamentoFisico() {
+		return idAcompanhamentoFisico;
 	}
 
-	public void setIdAvaliacaoFisica(Integer idAvaliacaoFisica) {
-		this.idAvaliacaoFisica = idAvaliacaoFisica;
+	public void setIdAcompanhamentoFisico(Integer idAcompanhamentoFisico) {
+		this.idAcompanhamentoFisico = idAcompanhamentoFisico;
 	}
 
 	public Date getData() {
@@ -154,25 +151,13 @@ public class AvaliacaoFisica  {
 	public void setSituacaoImc(String situacaoImc) {
 		this.situacaoImc = situacaoImc;
 	}
-	
-	
 
-	public Cliente getCliente() {
-		return cliente;
+	public AvaliacaoFisica getAvaliacaoFisica() {
+		return avaliacaoFisica;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	
-
-	public List<AcompanhamentoFisico> getAcompanhamentos() {
-		return acompanhamentos;
-	}
-
-	public void setAcompanhamentos(List<AcompanhamentoFisico> acompanhamentos) {
-		this.acompanhamentos = acompanhamentos;
+	public void setAvaliacaoFisica(AvaliacaoFisica avaliacaoFisica) {
+		this.avaliacaoFisica = avaliacaoFisica;
 	}
 
 	@Override
@@ -181,8 +166,8 @@ public class AvaliacaoFisica  {
 		int result = 1;
 		result = prime
 				* result
-				+ ((idAvaliacaoFisica == null) ? 0 : idAvaliacaoFisica
-						.hashCode());
+				+ ((idAcompanhamentoFisico == null) ? 0
+						: idAcompanhamentoFisico.hashCode());
 		return result;
 	}
 
@@ -194,25 +179,16 @@ public class AvaliacaoFisica  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AvaliacaoFisica other = (AvaliacaoFisica) obj;
-		if (idAvaliacaoFisica == null) {
-			if (other.idAvaliacaoFisica != null)
+		AcompanhamentoFisico other = (AcompanhamentoFisico) obj;
+		if (idAcompanhamentoFisico == null) {
+			if (other.idAcompanhamentoFisico != null)
 				return false;
-		} else if (!idAvaliacaoFisica.equals(other.idAvaliacaoFisica))
+		} else if (!idAcompanhamentoFisico.equals(other.idAcompanhamentoFisico))
 			return false;
 		return true;
 	}
-
-	//public Cliente getCliente() {
-	//	return cliente;
-	//}
-
-	//public void setCliente(Cliente cliente) {
-		//this.cliente = cliente;
-	//}
-	
-	
-
-	
-	
 }
+	
+	
+
+	

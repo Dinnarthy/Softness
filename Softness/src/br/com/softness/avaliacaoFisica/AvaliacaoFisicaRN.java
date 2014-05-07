@@ -42,11 +42,15 @@ public class AvaliacaoFisicaRN {
 
 	}
 	
+	public List<AvaliacaoFisica> listarTodos(){
+		return avaliacaoFisicaDAO.listarTodos();
+	}
+	
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome() {
 		return avaliacaoFisicaDAO.listarAvaliacaoFisicaByNome2();
 	}
 	
-	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf(){
-		return avaliacaoFisicaDAO.listarAvaliacaoFisicaByCpf();
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf(String campoPesquisa){
+		return avaliacaoFisicaDAO.listarAvaliacaoFisicaByCpf(campoPesquisa);
 	}
 }

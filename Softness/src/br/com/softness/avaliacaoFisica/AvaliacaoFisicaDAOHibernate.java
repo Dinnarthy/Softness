@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.softness.cliente.Cliente;
@@ -83,16 +85,21 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 	
 	
 
-	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf() {
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf(String campoPesquisa) {
 		Criteria crit = session.createCriteria(AvaliacaoFisica.class);
 		Criteria crit2 = crit.createCriteria("cliente");
-		crit2.add(Restrictions.eq("cpf", "11111111111"));
+		crit2.setProjection(Projections.projectionList().add(   
+		Projections.distinct(Projections.property("cliente.cpf"))))
+		.add(Restrictions.eq("cpf", campoPesquisa));
+		
 		return crit2.list();
 	}
 
-	public List<AvaliacaoFisica> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AvaliacaoFisica> listarTodos() {
+		Criteria crit = session.createCriteria(AvaliacaoFisica.class);
+		
+		return crit.list();
+		
 	}
 
 }

@@ -25,6 +25,7 @@
 							<h:inputText id="idAvalicaoFisica" disabled="true"
 								value="#{avaliacaoFisicaBean.avaliacaoFisica.idAvaliacaoFisica}"
 								size="4" maxlength="4" />
+								
 							<h:outputLabel for="nomePaciente" value="Paciente:" />
 							<h:inputText id="nomePaciente" disabled="true" immediate="true"
 								size="80" maxlength="60"
@@ -47,7 +48,7 @@
 									emptyMessage="Nennhum cliente encontrado" var="cliente"
 									value="#{clienteBean.clientes}" selectionMode="single"
 									rowKey="#{cliente.nome}"
-									selection="#{avaliacaoFisicaBean.selected}">
+									>
 									<p:ajax event="rowSelect"
 										listener="#{avaliacaoFisicaBean.onRowSelect}"
 										update=":edicao:tBAvaliacao:nomePaciente,:edicao:tBAvaliacao:peso,:edicao:tBAvaliacao:altura,
@@ -79,7 +80,7 @@
 
 							<h:outputLabel for="dataCadastro" value="Data:" />
 							<h:outputText id="dataCadastro"
-								value="#{avaliacaoFisicaBean.avaliacaoFisica.data}">
+								value="#{avaliacaoFisicaBean.acompanhamentoFisico.data}">
 								<f:convertDateTime pattern="dd/MM/yyyy" type="date"
 									timeZone="GMT-3" />
 							</h:outputText>
@@ -92,31 +93,31 @@
 							<h:panelGrid id="pG4" columns="11">
 								<h:inputText id="peso" requiredMessage="Peso Obrigatório"
 									size="5" disabled="#{avaliacaoFisicaBean.campos}"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.peso}"
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.peso}"
 									maxlength="5" />
 								<h:outputLabel for="altura" value="Altura(metros):" />
 								<h:inputText id="altura" size="5"
 									requiredMessage="Altura Obrigatório"
 									disabled="#{avaliacaoFisicaBean.campos}" maxlength="5"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.altura}">
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.altura}">
 
 								</h:inputText>
 								<h:outputLabel for="cintura" value="Cintura:" />
 								<h:inputText id="cintura" size="3"
 									disabled="#{avaliacaoFisicaBean.campos}"
 									requiredMessage="Cintura Obrigatório" maxlength="3"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.cintura}" />
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.cintura}" />
 								<h:outputLabel for="pescoco" value="Pescoço:" />
 								<h:inputText id="pescoco" size="2"
 									disabled="#{avaliacaoFisicaBean.campos}"
 									requiredMessage="Pescoço Obrigatório" maxlength="2"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.pescoco}" />
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.pescoco}" />
 								<h:outputLabel for="quadril" value="Quadril:" />
 								<h:inputText id="quadril" size="3" disabled="true" maxlength="3"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.quadril}" />
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.quadril}" />
 								<p:commandButton id="calcular" value="Calcular"
 									actionListener="#{avaliacaoFisicaBean.calcular}"
-									update="imc,situacaoImc,resultadoGorduraCorporal,growl" />
+									update="growl,resultadoGorduraCorporal,imc,situacaoImc" />
 								<p:commandButton id="add" value="Adicionar"
 									actionListener="#{avaliacaoFisicaBean.adicionar}"
 									update="acompanhamentos" />
@@ -142,7 +143,7 @@
 								</h:inputText>
 								<h:outputLabel for="situacaoImc" value="Situação IMC:" />
 								<h:outputText id="situacaoImc"
-									value="#{avaliacaoFisicaBean.avaliacaoFisica.situacaoImc}" />
+									value="#{avaliacaoFisicaBean.acompanhamentoFisico.situacaoImc}" />
 							</h:panelGrid>
 						</h:panelGrid>
 
@@ -150,8 +151,9 @@
 
 					<p:dataTable id="acompanhamentos" var="acompanhamento"
 						scrollable="true" scrollWidth="1320"
-						emptyMessage="Nenhum Acompanhamento Adicionado">
-						<!--  value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" -->
+						emptyMessage="Nenhum Acompanhamento Adicionado"
+						value="#{avaliacaoFisicaBean.listaAcompanhamentoFisico}"
+						 >
 
 
 
@@ -243,22 +245,29 @@
 				<p:tab title="Consulta">
 					<fieldset>
 						<legend>Consulta Avaliacão</legend>
-						Consulta:
-						<h:selectOneMenu>
-							<f:selectItem itemLabel="ID" />
-							<f:selectItem itemLabel="CPF" />
-							<f:selectItem itemLabel="NOME" />
+						 Consulta:
+						<h:selectOneMenu value="#{avaliacaoFisicaBean.selecaoPesquisa}">
+							<f:selectItem itemLabel="ID" itemValue="id" />
+							<f:selectItem itemLabel="CPF" itemValue="cpf" />
+							<f:selectItem itemLabel="NOME" itemValue="nome" />
 
 						</h:selectOneMenu>
-						<h:inputText value="" size="10" />
-						<p:commandLink>
+						
+						<h:inputText  size="50" value="#{avaliacaoFisicaBean.campoPesquisa}" />
+						
+						<p:commandLink actionListener="#{avaliacaoFisicaBean.pesquisarAvaliacaoFisica}" update="consultaAvaliacao,growl"> 
 							<p:graphicImage value="/resources/img/search24x24.png" />
 						</p:commandLink>
 						
 
 						<p:dataTable id="consultaAvaliacao" var="avaliacoes"
 							emptyMessage="Nenhuma AvaliacaoFisica Cadastrado"
-							value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}">
+							value="#{avaliacaoFisicaBean.listaAvaliacaoFisica}" selectionMode="single"
+									rowKey="#{avaliacoes.idAvaliacaoFisica}"
+									   >
+									<p:ajax event="rowSelect"
+										listener="#{avaliacaoFisicaBean.onRowSelect2}"
+										update=":edicao:tBAvaliacao" />
 
 							<p:column headerText="Id">
 #{avaliacoes.idAvaliacaoFisica}

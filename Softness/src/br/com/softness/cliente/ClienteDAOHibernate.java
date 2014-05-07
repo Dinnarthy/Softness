@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
 public class ClienteDAOHibernate implements ClienteDAO {
 	
@@ -50,6 +51,7 @@ public class ClienteDAOHibernate implements ClienteDAO {
 
 	public List consultaTodosClientes() {
 		Criteria crit = session.createCriteria(Cliente.class);
+		
 		crit.setMaxResults(15);
 		return crit.list();
 	}

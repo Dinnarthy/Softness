@@ -20,12 +20,12 @@ public List consultaTodasAvaliacoesFisica();
 	
 	public AvaliacaoFisica getByNome(String nome);
 	
-	public List<AvaliacaoFisica>listar();
+	public List<AvaliacaoFisica>listarTodos();
 	
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome(Integer idCliente);
 	
 	public List<AvaliacaoFisica> listarAvaliacaoFisicaByNome2();
 	
-	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf();
+	public List<AvaliacaoFisica> listarAvaliacaoFisicaByCpf(String campoPesquisa);
 
 }

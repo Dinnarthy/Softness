@@ -2,6 +2,7 @@ package br.com.softness.avaliacaoFisica;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
+import br.com.softness.acompanhamentoFisico.AcompanhamentoFisico;
+import br.com.softness.acompanhamentoFisico.AcompanhamentoFisicoRN;
 import br.com.softness.cliente.Cliente;
 
 
@@ -21,17 +24,21 @@ import br.com.softness.cliente.Cliente;
 @ManagedBean(name = "avaliacaoFisicaBean")
 @ViewScoped
 public class AvaliacaoFisicaBean {
-
+	
+	private String campoPesquisa;
+	private String selecaoPesquisa;
 	private boolean campos ;
 	private Double resultadoImc;
 	private Double taxaGordura;
 	//private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
 	private List<AvaliacaoFisica> listaAvaliacaoFisica ;
-
+	private List<AcompanhamentoFisico> listaAcompanhamentoFisico = new ArrayList<AcompanhamentoFisico>();
+	
 	private Cliente cliente;
 	private String nomeCliente;
 	private Cliente cliente2 ;
 	private AvaliacaoFisica avaliacaoFisica ;
+	private AcompanhamentoFisico acompanhamentoFisico;
 	
 	
 
@@ -41,7 +48,7 @@ public class AvaliacaoFisicaBean {
 	@PostConstruct
 	public void init(){
 		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
-		listaAvaliacaoFisica = avaliacaoFisicaRN.listarAvaliacaoFisicaByCpf();
+		listaAvaliacaoFisica = avaliacaoFisicaRN.listarTodos();
 		
 		
 		
@@ -52,18 +59,27 @@ public class AvaliacaoFisicaBean {
 		return "avaliacaoFisica.xhtml";
 	}
 	
-	public void pesquisarAvaliacaoFisica(){
+	public void pesquisarAvaliacaoFisica(ActionEvent event){
+		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
+		if(selecaoPesquisa.equals("cpf")){
+			listaAvaliacaoFisica = avaliacaoFisicaRN.listarAvaliacaoFisicaByCpf(campoPesquisa);
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(
+					"Consulta ainda não programada"));
+			
+		}
 		
 	}
 	
 	
 	public void adicionar(ActionEvent event){
-		listaAvaliacaoFisica.add(avaliacaoFisica);
+		listaAcompanhamentoFisico.add(acompanhamentoFisico);
 		
 		
 		
 	}
-	
+	/*----------INICIO--Tabela de Consultar Paciente em AvaliacaoFisica.xhtml--------   */
 public void onRowSelect(SelectEvent event) {
 		habilitarCampos();
         this.cliente = (Cliente) event.getObject(); 
@@ -75,33 +91,58 @@ public void onRowSelect(SelectEvent event) {
        
     }
 
-public void setSelected(Cliente selected) {
+/*public void setSelected(Cliente selected) {
 	
     this.cliente = selected;
     
     
 }
+
  public Cliente getSelected() {
 	 	
         return cliente;
         
-    }
-	
-	
+    }*/
+ /*------------FIM--- Tabela de Consultar Paciente em AvaliacaoFisica.xhtml--------   
+
+ public void setSelected2(AvaliacaoFisica selected){
+	 this.avaliacaoFisica = selected ;
+ }
+ public AvaliacaoFisica getSelected2(){
+	 return avaliacaoFisica;
+ }*/
+ public void onRowSelect2(SelectEvent event){
+	 this.avaliacaoFisica = (AvaliacaoFisica) event.getObject();
+	 nomeCliente = avaliacaoFisica.getCliente().getNome();
+	 AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
+	 listaAcompanhamentoFisico = acompanhamentoFisicoRN.listarAcompnhamentoFisicoByIdAvaliacao(avaliacaoFisica.getIdAvaliacaoFisica());
+	 avaliacaoFisica.setAcompanhamentos(listaAcompanhamentoFisico);
+	 if(listaAcompanhamentoFisico==null){
+		 System.out.print("ListaAcompanhamentoFisico está null");
+	 }else{
+		 System.out.print("ListaAcompanhamentoFisico está populada");
+
+	 }
+	 
+	 
+ }
 
 	public void salvar(ActionEvent event) {
 		System.out.print("DAta-------------------- "
-				+ avaliacaoFisica.getData());
+				+ acompanhamentoFisico.getData());
 		System.out.print("Altura-------------------- "
-				+ avaliacaoFisica.getAltura());
+				+ acompanhamentoFisico.getAltura());
 		System.out.print("Cintura--------------------"
-				+ avaliacaoFisica.getCintura());
+				+ acompanhamentoFisico.getCintura());
 		System.out
-				.print("Peso--------------------" + avaliacaoFisica.getPeso());
+				.print("Peso--------------------" + acompanhamentoFisico.getPeso());
 		System.out.print("\n Entrou no Salvar do ManagedBean \n");
 		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
 		avaliacaoFisica.setCliente(cliente2);
 		avaliacaoFisicaRN.salvar(avaliacaoFisica);
+		AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
+		acompanhamentoFisico.setAvaliacaoFisica(avaliacaoFisica);
+		acompanhamentoFisicoRN.salvar(acompanhamentoFisico);
 		desabilitarCampos();
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(
@@ -112,13 +153,13 @@ public void setSelected(Cliente selected) {
 	
 	public void calcularImc(){
 		
-		Double alturaDouble = Double.parseDouble(avaliacaoFisica.getAltura());
+		Double alturaDouble = Double.parseDouble(acompanhamentoFisico.getAltura());
 		alturaDouble = alturaDouble / 100;
-		Double pesoDouble = Double.parseDouble(avaliacaoFisica.getPeso());
+		Double pesoDouble = Double.parseDouble(acompanhamentoFisico.getPeso());
 		resultadoImc = pesoDouble/(alturaDouble*alturaDouble);
 		
 		String resultadoImc2 = String.valueOf(resultadoImc);
-		avaliacaoFisica.setImc(resultadoImc2);
+		acompanhamentoFisico.setImc(resultadoImc2);
 		if(cliente==null){
 		System.out.print("\n\n Cliente está null no Calular IMC");
 		}
@@ -140,33 +181,33 @@ public void setSelected(Cliente selected) {
 	
 	public void calcularSituacaoImc(){
 		if(resultadoImc < 17 ){
-			avaliacaoFisica.setSituacaoImc("Muito Abaixo do Peso");
+			acompanhamentoFisico.setSituacaoImc("Muito Abaixo do Peso");
 		}else if(resultadoImc>17 && resultadoImc<18.49){
-			avaliacaoFisica.setSituacaoImc("Abaixo do Peso");
+			acompanhamentoFisico.setSituacaoImc("Abaixo do Peso");
 		}else if(resultadoImc >18.5 && resultadoImc < 24.99){
-			avaliacaoFisica.setSituacaoImc("Peso Normal");
+			acompanhamentoFisico.setSituacaoImc("Peso Normal");
 		}else if(resultadoImc>25.00 && resultadoImc<29.99){
-			avaliacaoFisica.setSituacaoImc("Acima do Peso");
+			acompanhamentoFisico.setSituacaoImc("Acima do Peso");
 		}else if(resultadoImc>30.00 && resultadoImc<34.99){
-			avaliacaoFisica.setSituacaoImc("Obesidade I ");
+			acompanhamentoFisico.setSituacaoImc("Obesidade I ");
 		}
 		else if(resultadoImc>35.00 && resultadoImc<39.99){
-			avaliacaoFisica.setSituacaoImc("Obesidade II (Severa) ");
+			acompanhamentoFisico.setSituacaoImc("Obesidade II (Severa) ");
 		}
 		else {
-			avaliacaoFisica.setSituacaoImc("Obesidade III (Mórbida)");
+			acompanhamentoFisico.setSituacaoImc("Obesidade III (Mórbida)");
 		}
 		
 	}
 	
 	public void calcularTaxaDeGordura(){
-		Double alturaDouble = Double.parseDouble(avaliacaoFisica.getAltura());
-		Double cinturaDouble = Double.parseDouble(avaliacaoFisica.getCintura());
-		Double pescocoDouble = Double.parseDouble(avaliacaoFisica.getPescoco());
+		Double alturaDouble = Double.parseDouble(acompanhamentoFisico.getAltura());
+		Double cinturaDouble = Double.parseDouble(acompanhamentoFisico.getCintura());
+		Double pescocoDouble = Double.parseDouble(acompanhamentoFisico.getPescoco());
 		taxaGordura = 495/(1.0324-.19077*(Math.log10(cinturaDouble-pescocoDouble))+.15456*(Math.log10(alturaDouble)))-450;
 		taxaGordura = 86.010*Math.log10(cinturaDouble-pescocoDouble)-70.041*Math.log10(alturaDouble)+30.30;
 		String gorduraString = String.valueOf(taxaGordura);
-		avaliacaoFisica.setTaxaGordura(gorduraString);
+		acompanhamentoFisico.setTaxaGordura(gorduraString);
 
 
 		
@@ -187,6 +228,8 @@ public void setSelected(Cliente selected) {
 
 	public void novo(ActionEvent event) {
 		avaliacaoFisica = new AvaliacaoFisica();
+		acompanhamentoFisico = new AcompanhamentoFisico();
+		
 		
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -248,6 +291,33 @@ public void setSelected(Cliente selected) {
 	public void setCliente2(Cliente cliente2) {
 		this.cliente2 = cliente2;
 	}
+	public String getSelecaoPesquisa() {
+		return selecaoPesquisa;
+	}
+	public void setSelecaoPesquisa(String selecaoPesquisa) {
+		this.selecaoPesquisa = selecaoPesquisa;
+	}
+	public String getCampoPesquisa() {
+		return campoPesquisa;
+	}
+	public void setCampoPesquisa(String campoPesquisa) {
+		this.campoPesquisa = campoPesquisa;
+	}
+	public AcompanhamentoFisico getAcompanhamentoFisico() {
+		return acompanhamentoFisico;
+	}
+	public void setAcompanhamentoFisico(AcompanhamentoFisico acompanhamentoFisico) {
+		this.acompanhamentoFisico = acompanhamentoFisico;
+	}
+	public List<AcompanhamentoFisico> getListaAcompanhamentoFisico() {
+		return listaAcompanhamentoFisico;
+	}
+	public void setListaAcompanhamentoFisico(
+			List<AcompanhamentoFisico> listaAcompanhamentoFisico) {
+		this.listaAcompanhamentoFisico = listaAcompanhamentoFisico;
+	}
+	
+	
 	
 	
 	
