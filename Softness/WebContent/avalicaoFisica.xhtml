@@ -30,8 +30,8 @@
 							<h:inputText id="nomePaciente" disabled="true" immediate="true"
 								size="80" maxlength="60"
 								value="#{avaliacaoFisicaBean.nomeCliente}" />
-							<p:commandLink onclick="consultaCliente.show()"
-								disable="#{avaliacaoFisicaBean.avaliacaoFisica==null}">
+							<p:commandLink onclick="consultaCliente.show()" disabled="#{avaliacaoFisicaBean.botoes}"
+								>
 								<p:graphicImage value="/resources/img/search24x24.png" />
 							</p:commandLink>
 							<!-- **************************INICIO Dialog ConsultaCliente*************************** -->
@@ -115,12 +115,12 @@
 								<h:outputLabel for="quadril" value="Quadril:" />
 								<h:inputText id="quadril" size="3" disabled="true" maxlength="3"
 									value="#{avaliacaoFisicaBean.acompanhamentoFisico.quadril}" />
-								<p:commandButton id="calcular" value="Calcular"
+								<p:commandButton id="calcular" value="Calcular" disabled="#{avaliacaoFisicaBean.botoes}"
 									actionListener="#{avaliacaoFisicaBean.calcular}"
 									update="growl,resultadoGorduraCorporal,imc,situacaoImc" />
-								<p:commandButton id="add" value="Adicionar"
+								<p:commandButton id="add" value="Adicionar" disabled="#{avaliacaoFisicaBean.botoes}"
 									actionListener="#{avaliacaoFisicaBean.adicionar}"
-									update="acompanhamentos" />
+									update="acompanhamentos,growl,add" />
 
 
 
@@ -224,15 +224,16 @@
 
 
 						<p:commandButton id="novo" value="Novo"
-							actionListener="#{avaliacaoFisicaBean.novo}" update=":edicao" />
-						<p:commandButton id="editar" value="Editar" />
+							actionListener="#{avaliacaoFisicaBean.novo}"  update=":edicao" />
+						<p:commandButton id="editar" value="Editar"
+						 actionListener="#{avaliacaoFisicaBean.editar}" update=":edicao" />
 						<p:commandButton id="exluir" value="Exluir" />
 						<p:commandButton id="salvar" value="Salvar" update=":edicao"
 							actionListener="#{avaliacaoFisicaBean.salvar}" />
 
 
 						<p:commandButton id="cancelar" value="Cancelar" ajax="false"
-							immediate="true" process="@form"
+							 process="@this" immediate="true"
 							action="#{avaliacaoFisicaBean.cancelar}" />
 
 

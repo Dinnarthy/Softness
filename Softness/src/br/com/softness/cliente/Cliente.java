@@ -27,7 +27,7 @@ public class Cliente {
 	@GeneratedValue
 	private Integer idCliente;
 	
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente",cascade=CascadeType.ALL)
 	private List<AvaliacaoFisica> avaliacoes;
 
 	@Column(name = "nome", nullable = false)

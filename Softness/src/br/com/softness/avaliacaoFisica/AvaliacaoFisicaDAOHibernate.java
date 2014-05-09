@@ -44,7 +44,7 @@ public class AvaliacaoFisicaDAOHibernate implements AvaliacaoFisicaDAO {
 	}
 
 	public void alter(AvaliacaoFisica user) {
-		session.update(user);
+		session.merge(user);
 
 	}
 

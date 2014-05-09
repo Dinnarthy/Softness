@@ -1,5 +1,6 @@
 package br.com.softness.acompanhamentoFisico;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,6 +16,8 @@ public interface AcompanhamentoFisicoDAO {
 	public List<AcompanhamentoFisico>listarTodos();
 	
 	public List<AcompanhamentoFisico> listarAcompnhamentoFisicoByIdAvaliacao(Integer campoPesquisa);
+	
+	public List<AcompanhamentoFisico> listarAcompanhamentoFisicoByData(Date data);
 	
 	
 

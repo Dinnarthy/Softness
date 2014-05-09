@@ -30,15 +30,15 @@ public class AvaliacaoFisicaRN {
 
 	public void salvar(AvaliacaoFisica avaliacaoFisica) {
 
-		//Integer idAvalicaoFisica = avaliacaoFisica.getIdAvaliacaoFisica();
+		Integer idAvalicaoFisica = avaliacaoFisica.getIdAvaliacaoFisica();
 
-	//	if (idAvalicaoFisica == null) {
+		if (idAvalicaoFisica == null) {
 			avaliacaoFisicaDAO.salvar(avaliacaoFisica);
 			System.out.print("CLienteRN idAvaliacaoFisica = 0 ou = NULL");
-		//} else {
-		//	avaliacaoFisicaDAO.alter(avaliacaoFisica);
-		//	System.out.print("CLienteRN idCliente <> 0 ou <> NULL");
-		//}
+		} else {
+			avaliacaoFisicaDAO.alter(avaliacaoFisica);
+			System.out.print("CLienteRN idCliente <> 0 ou <> NULL");
+	}
 
 	}
 	

@@ -1,5 +1,6 @@
 package br.com.softness.acompanhamentoFisico;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -33,7 +34,7 @@ public class AcompanhamentoFisicoDAOHibernate implements
 	}
 
 	public void alter(AcompanhamentoFisico acompanhamentoFisico) {
-		session.update(acompanhamentoFisico);
+		session.merge(acompanhamentoFisico);
 
 	}
 
@@ -52,6 +53,14 @@ public class AcompanhamentoFisicoDAOHibernate implements
 		
 		return crit2.list();
 	}
+
+	public List<AcompanhamentoFisico> listarAcompanhamentoFisicoByData(Date data) {
+		Criteria crit = session.createCriteria(AcompanhamentoFisico.class);
+		crit.add(Restrictions.eq("data", data));
+		return crit.list();
+	}
+	
+	
 
 	
 

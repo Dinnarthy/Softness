@@ -7,6 +7,7 @@ import java.util.Date;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class AvaliacaoFisica  {
 	@OneToMany(mappedBy="avaliacaoFisica")
 	private List<AcompanhamentoFisico> acompanhamentos;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	

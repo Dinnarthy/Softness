@@ -4,6 +4,7 @@ package br.com.softness.avaliacaoFisica;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -28,10 +29,11 @@ public class AvaliacaoFisicaBean {
 	private String campoPesquisa;
 	private String selecaoPesquisa;
 	private boolean campos ;
+	private boolean botoes ;
 	private Double resultadoImc;
 	private Double taxaGordura;
 	//private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
-	private List<AvaliacaoFisica> listaAvaliacaoFisica ;
+	private List<AvaliacaoFisica> listaAvaliacaoFisica = new ArrayList<AvaliacaoFisica>() ;
 	private List<AcompanhamentoFisico> listaAcompanhamentoFisico = new ArrayList<AcompanhamentoFisico>();
 	
 	private Cliente cliente;
@@ -39,6 +41,7 @@ public class AvaliacaoFisicaBean {
 	private Cliente cliente2 ;
 	private AvaliacaoFisica avaliacaoFisica ;
 	private AcompanhamentoFisico acompanhamentoFisico;
+	private int contAdicionar=0;  //variavel para desabilitar botao adicionar quando adicionado companhamento
 	
 	
 
@@ -52,9 +55,12 @@ public class AvaliacaoFisicaBean {
 		
 		
 		
-		
+		desabilitarBotoes();
 		desabilitarCampos();
 								}
+	
+
+	
 	public String cancelar(){
 		return "avaliacaoFisica.xhtml";
 	}
@@ -74,20 +80,57 @@ public class AvaliacaoFisicaBean {
 	
 	
 	public void adicionar(ActionEvent event){
-		listaAcompanhamentoFisico.add(acompanhamentoFisico);
+		Date data = new Date();
+		AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
+		List<AcompanhamentoFisico> acompanhamento1 = acompanhamentoFisicoRN.listarAcompanhamentoFisicoByData(data);
+		if(acompanhamento1==null){
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(
+					"Nao existe acompanhamento desse paciente feita hoje"));
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(
+					"Já existe acompanhamento desse paciente feita hoje"));
+		}
+		if(contAdicionar==0){
+			listaAcompanhamentoFisico.add(acompanhamentoFisico);
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(
+					"Consulta ainda não programada"));
+		}
+	
+	
+			
+	
+		
+				
+				}
+			
+				
+			
+			
+			
+			
+			
+			
+	
+	     
+			
 		
 		
 		
-	}
+		
+	
 	/*----------INICIO--Tabela de Consultar Paciente em AvaliacaoFisica.xhtml--------   */
 public void onRowSelect(SelectEvent event) {
 		habilitarCampos();
         this.cliente = (Cliente) event.getObject(); 
         nomeCliente=cliente.getNome();
-        cliente2 = cliente;
+        //cliente2 = cliente;
         
-        System.out.print("ID----"+ cliente.getIdCliente());
-       System.out.print("\n ID----"+ cliente.getNome());
+        System.out.print("ID------------------------"+ cliente.getIdCliente());
+       System.out.print("\n ID-------------------------"+ cliente.getNome());
        
     }
 
@@ -114,6 +157,7 @@ public void onRowSelect(SelectEvent event) {
  public void onRowSelect2(SelectEvent event){
 	 this.avaliacaoFisica = (AvaliacaoFisica) event.getObject();
 	 nomeCliente = avaliacaoFisica.getCliente().getNome();
+	 cliente = avaliacaoFisica.getCliente();
 	 AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
 	 listaAcompanhamentoFisico = acompanhamentoFisicoRN.listarAcompnhamentoFisicoByIdAvaliacao(avaliacaoFisica.getIdAvaliacaoFisica());
 	 avaliacaoFisica.setAcompanhamentos(listaAcompanhamentoFisico);
@@ -128,27 +172,33 @@ public void onRowSelect(SelectEvent event) {
  }
 
 	public void salvar(ActionEvent event) {
-		System.out.print("DAta-------------------- "
-				+ acompanhamentoFisico.getData());
-		System.out.print("Altura-------------------- "
-				+ acompanhamentoFisico.getAltura());
-		System.out.print("Cintura--------------------"
-				+ acompanhamentoFisico.getCintura());
-		System.out
-				.print("Peso--------------------" + acompanhamentoFisico.getPeso());
+		
 		System.out.print("\n Entrou no Salvar do ManagedBean \n");
 		AvaliacaoFisicaRN avaliacaoFisicaRN = new AvaliacaoFisicaRN();
-		avaliacaoFisica.setCliente(cliente2);
-		avaliacaoFisicaRN.salvar(avaliacaoFisica);
-		AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
+		avaliacaoFisica.setCliente(cliente);
+		if(avaliacaoFisica==null){
+			System.out.print("\n ---------------------------A AvaliacaoFisica está null-------------------- \n");
+
+		}else{
+			System.out.print("\n ---------------------------A AvaliacaoFisica não está null-------------------- \n");
+		}
+		
 		acompanhamentoFisico.setAvaliacaoFisica(avaliacaoFisica);
+		AcompanhamentoFisicoRN acompanhamentoFisicoRN = new AcompanhamentoFisicoRN();
 		acompanhamentoFisicoRN.salvar(acompanhamentoFisico);
+		avaliacaoFisicaRN.salvar(avaliacaoFisica);
+		desabilitarBotoes();
 		desabilitarCampos();
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(
 				"Avalicao Fisica Cadastrada com Sucesso"));
 		System.out.print(" \nPassou pelo salvar do ManagedBean \n");
 
+	}
+	
+	public void editar(ActionEvent event){
+		acompanhamentoFisico = new AcompanhamentoFisico();
+		habilitarCampos();
 	}
 	
 	public void calcularImc(){
@@ -214,7 +264,13 @@ public void onRowSelect(SelectEvent event) {
 		
 		
 	}
+	public void habilitarBotoes(){
+	botoes = false ;
+	}
 	
+	public void desabilitarBotoes(){
+	botoes = true;	
+	}
 	
 
 	public void habilitarCampos() {
@@ -229,6 +285,7 @@ public void onRowSelect(SelectEvent event) {
 	public void novo(ActionEvent event) {
 		avaliacaoFisica = new AvaliacaoFisica();
 		acompanhamentoFisico = new AcompanhamentoFisico();
+		habilitarBotoes();
 		
 		
 		
@@ -315,6 +372,18 @@ public void onRowSelect(SelectEvent event) {
 	public void setListaAcompanhamentoFisico(
 			List<AcompanhamentoFisico> listaAcompanhamentoFisico) {
 		this.listaAcompanhamentoFisico = listaAcompanhamentoFisico;
+	}
+	public int getContAdicionar() {
+		return contAdicionar;
+	}
+	public void setContAdicionar(int contAdicionar) {
+		this.contAdicionar = contAdicionar;
+	}
+	public boolean isBotoes() {
+		return botoes;
+	}
+	public void setBotoes(boolean botoes) {
+		this.botoes = botoes;
 	}
 	
 	

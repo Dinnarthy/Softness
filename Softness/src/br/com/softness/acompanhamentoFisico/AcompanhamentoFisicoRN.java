@@ -1,5 +1,6 @@
 package br.com.softness.acompanhamentoFisico;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.softness.avaliacaoFisica.AvaliacaoFisica;
@@ -13,7 +14,15 @@ public class AcompanhamentoFisicoRN {
 	}
 	
 	public void salvar(AcompanhamentoFisico acompanhamentoFisico) {
-		acompanhamentoFisicoDAO.salvar(acompanhamentoFisico);
+		
+		Integer idAcompanhamentoFisico = acompanhamentoFisico.getIdAcompanhamentoFisico();
+		if(idAcompanhamentoFisico==null){
+			acompanhamentoFisicoDAO.salvar(acompanhamentoFisico);
+		System.out.print("CLienteRN idCliente = 0 ou = NULL");
+		}else{
+			acompanhamentoFisicoDAO.alter(acompanhamentoFisico);
+		System.out.print("CLienteRN idCliente <> 0 ou <> NULL");
+		}
 
 	}
 	
@@ -33,6 +42,10 @@ public class AcompanhamentoFisicoRN {
 			Integer campoPesquisa) {
 		
 		return acompanhamentoFisicoDAO.listarAcompnhamentoFisicoByIdAvaliacao(campoPesquisa);
+	}
+	
+	public List<AcompanhamentoFisico>listarAcompanhamentoFisicoByData(Date data){
+		return acompanhamentoFisicoDAO.listarAcompanhamentoFisicoByData(data);
 	}
 	
 	

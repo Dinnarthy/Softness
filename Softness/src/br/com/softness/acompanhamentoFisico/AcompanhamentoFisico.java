@@ -6,6 +6,8 @@ import java.util.Date;
 
 
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +34,7 @@ public class AcompanhamentoFisico  {
 	@GeneratedValue
 	private Integer idAcompanhamentoFisico;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="avaliacao_id")
 	private AvaliacaoFisica avaliacaoFisica;
 	
